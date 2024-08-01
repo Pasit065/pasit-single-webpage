@@ -1,38 +1,952 @@
-.App {
+@font-face {
+	font-family: Centra;
+	src: url('../public/assets/font/CentraNo2-Bold.ttf');
+	font-weight: 700;
+}
+@font-face {
+	font-family: Centra;
+	src: url('../public/assets/font/CentraNo2-Medium.ttf');
+	font-weight: 500;
+}
+@font-face {
+	font-family: Centra;
+	src: url('../public/assets/font/CentraNo2-Book.ttf');
+	font-weight: 400;
+} 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 75px;
+}
+
+body {
+  font-weight: 450;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #0a0044 !important;
+  color: #ffffff !important;
+  font-family: 'Centra', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+
+p, a, li, button, ul {
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+  text-decoration: none;
+}
+
+a, button {
+  overflow: hidden;
+}
+a:hover {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+button {
+  border: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
+
+@media (min-width:1700px) {
+	main .container {
+		max-width: 100%;
+		padding: 0 150px;
+	}
+}
+
+p.complete {
+	color: green;
+}
+
+p.incomplete {
+	color: red;
+}
+/************ Navbar Css ************/
+nav.navbar {
+  /* padding: 15px 0; */
+  /* position: fixed is to tell element that even you have scrolled page it will also in the same position */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 9999;
+  transition:  0.32s ease-in-out;
+  background-color: #0d062b;
+}
+
+nav.navbar a.navbar-brand {
+    width: 10%;
+    height: auto;
+}
+
+ /* nav.navbar.scrolled {
+  padding: 0px 0;
+  background-color: #9d97cf;
+} */
+
+nav.navbar .navbar-nav .nav-link {
+  font-weight: 600;
+  color: #fff !important;
+  letter-spacing: 0.9px;
+  padding: 0 20px;
+  font-size: 18px;
+  opacity: 0.65;
+}
+
+nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
+nav.navbar .navbar-nav a.nav-link.navbar-link.active {
+    opacity: 1;
+}
+
+.navbar-text .contact_us { 
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+  position: relative;
+  padding: 20px 35px;
+  border: 2px solid white;
+  transition: 0.25s ease-in-out;
+}
+
+.navbar-text .contact_us span {
+  position: relative;
+  z-index: 1;
+}
+/* ::before used to specify new content before content inside 'button' */
+/* ::before คือ อีก element ย่อยที่ตั้งตำเเหน่งอยู่ก่อน content หลัก */
+.navbar-text button::before {
+  content: "";
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  z-index: -1;
+  transition: 0.5s ease-in-out;
+}
+
+.navbar-text .contact_us:hover {
+  color: #121212;
+} 
+
+.me-auto {
+  margin-left: 35%;
+}
+ 
+.navbar-text button:hover::before {
+  content: "";
+	width: 100%;
+	position: absolute;
+} 
+
+nav.navbar .navbar-toggler:active,
+nav.navbar .navbar-toggler:focus {
+	outline: none;
+    box-shadow: none;
+}
+nav.navbar .navbar-toggler-icon {
+  width: 24px;
+  height: 17px;
+  background-image: none;
+  position: relative;
+  border-bottom: 2px solid #ffffff;
+  transition: all 300ms linear;
+  top: -2px;
+}
+nav.navbar .navbar-toggler-icon:focus {
+	border-bottom: 2px solid #ffffff;
+}
+nav.navbar .navbar-toggler-icon:after,
+nav.navbar .navbar-toggler-icon:before {
+	width: 24px;
+	position: absolute;
+	height: 2px;
+	background-color: #ffffff;
+	top: 0;
+	left: 0;
+	content: '';
+	z-index: 2;
+	transition: all 300ms linear;
+}
+nav.navbar .navbar-toggler-icon:after {
+	top: 8px;
+}
+nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
+	transform: rotate(45deg);
+	background-color: #ffffff;
+	height: 2px;
+}
+nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
+	transform: translateY(8px) rotate(-45deg);
+	background-color: #ffffff;
+	height: 2px;
+}
+nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+	border-color: transparent;
+}  
+
+/* Part 2: Banner style */
+
+.banner {
+  margin-top: 0;
+  padding: 200px 20px 200px 100px;
+  /* Uses 'url' as background image */
+  background-image: url('../public/assets/img/banner_background.png');
+  background-size: cover;
+  background-repeat: no-repeat; 
+}
+
+.banner h1 {
+  width: 90%;
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  line-height: 1;
+  margin-bottom: 40px;
+  display: block;
+}
+
+.banner p {
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  width: 90%;
+  margin-bottom: 60px;
+}
+
+.banner .subscribe-link {
+  margin-top: 30px;
+  position: relative;
+}
+
+.banner .subscribe-link button {
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  border: 2px solid white;
+  background-color: transparent;
+  padding: 15px 60px 15px 20px;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+  border-radius: 64px;
+  overflow: hidden;
+}
+
+.banner .subscribe-link span {
+  position: relative;
+  z-index: 1;
+}
+
+.banner .subscribe-link button::before {
+  content: "";
+  background-color: white;
+  border-radius: 64px;
+  top: 0;
+  right: 0;
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  transition: 0.5s ease-in-out;
+}
+
+.banner .subscribe-link button:hover {
+  color: #000;
+}
+
+.banner .subscribe-link button:hover::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+}
+/* Lets connect button */
+.banner img {
+  animation: updown 3s linear infinite;
+  z-index: -5;
+  height: 100%;
+  width: auto;
+  margin: 0 auto;
+}
+
+/* Up and down animation for banner image. */
+@keyframes updown {
+    0% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+/* Typing text style */
+.txt-rotate > .wrap {
+  border-right: 0.08em solid #666;
+}
+
+/************ Profiles style ************/
+
+.profile-bx {
+  position: relative;
+  background-image: url('../public/assets/img/banner_background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 100px 0px 100px 100px;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  line-height: 1.5em;
+  
+}
+
+.profile-bx .personal-details {
+  padding-left: 50px;
+  padding-top: 30px;
+}
+
+.profile-bx .profile-container .personal-inform {
+  width: 95%;
+}
+
+.profile-bx .profile-container .personal-inform p  {
+  margin-top: 20px;
+}
+
+.profile-bx h1 {
+  margin-bottom: 30px;
+  
+}
+
+.profile-bx .profile-container div { 
+  margin-bottom: 50px;
+}
+
+.profile-bx img {
+  align-items: center;
+  height: 250px;
+  width: auto;
+
+}
+
+.profile-bx .profile-container .add-inform {
+  width: 100%;
+  margin-top: 30px;
+  text-decoration: none;
+}
+
+.profile-bx .profile-container .add-inform h2 {
+  margin-bottom: 20px;
+  font-size: 40px;
+  padding-bottom: 15px;
+}
+
+.profile-bx .profile-container .add-inform p {
+  width: 70%;
+}
+
+.profile-bx .profile-container .add-inform .question-a {
+  margin-top: 55px;  
+  
+}
+
+.profile-bx .profile-container .add-inform .question-a button {
+  text-decoration: none;
+  border-radius: 64px;
+  position: relative;
+  border: 2px solid white;
+  font-size: 24px;
+  font-weight: 450;
+  padding: 15px 45px 15px 20px;
+  color: white;
+  background-color: transparent;
+  overflow: hidden;
+  transition: 0.5s ease-in-out;
+}
+
+.profile-bx .profile-container .add-inform .question-a button span {
+  z-index: 2;
+  position: relative;
+}
+
+.profile-bx .profile-container .add-inform .question-a button:before {
+  border-radius: 64px;
+  content: "";
+  width: 0%;
+  height: 100%;
+  background-color: white;
+  transition: 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.profile-bx .profile-container .add-inform .question-a button:hover {
+  color: #000;
+}
+
+.profile-bx .profile-container .add-inform .question-a button:hover::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  
+}
+
+
+
+/************ Skills Css ************/
+.skill {
+  position: relative;
+  background-image: url('../public/assets/img/banner_background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 75px 75px;
+  color: black;
+}
+
+.skill p {
+  font-size: 18px;
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  line-height: 1.5em;
+}
+
+
+.skill h1 {
+  font-size: 45px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  line-height: 1;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.skill h2 {
+  margin: 0 auto; 
+  font-size: 21px;
+  font-weight: 550;
+  letter-spacing: 0.2px;
+  line-height: 1;
+}
+
+.skill .skill-bx  {
+  background: white;
+  position: relative;
+  border-radius: 64px;
+  padding-top: 50px;
+  text-align: center;
+  padding-bottom: 50px;
+  margin-bottom: 130px;
+} 
+
+.skill .other-skill-bx  {
+  background: white;
+  border-radius: 64px;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-bottom: 130px;
+}
+
+
+.skill .skill-bx .code-skill-header {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.skill .skill-bx .skill-slider {
+  width: 95%;
+  margin: 3% auto;
+}
+
+.skill .skill-bx .skill-slider .item {
+  align-items: center;
+  margin: 0 auto;
+  width: 55%;
+  height: auto;
+}
+
+.skill .skill-bx .skill-slider .item img {
+  margin-bottom: 15%;  
+}
+
+
+
+.skill .other-skill-bx .other-skill-header {
+  margin: 0 auto;
+  width: 95%;
+} 
+
+
+.skill .other-skill-bx .skill-slider {
+  width: 95%;
+  margin: 3% auto;
+}
+
+
+
+.skill .other-skill-bx .skill-slider .item {
+  align-items: center;
+  margin: 0 auto;
+  width: 55%;
+}
+
+
+.skill .other-skill-bx .skill-slider .item img {
+  margin-bottom: 15%;  
+  height: 200px;
+}
+
+
+
+
+
+
+/************ Projects Css ************/
+
+.proj-bx {
+  background-image: url('../public/assets/img/banner_background.png');
+  background-size: cover;
+  background-repeat: no-repeat; 
+  padding: 100px 0;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.proj-bx .proj-header-bx {
+  margin: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.proj-bx .proj-card-bx, .proj-bx .proj-header-bx  {
+  background-color: #0d062b;
+  margin-bottom: 5%;
+  border-radius: 25px;
+  padding: 5%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.proj-bx .proj-header-bx  {
+  text-align: left;
+}
+
+.proj-bx .proj-card-bx .proj-col, .proj-bx .proj-header-bx .proj-col {
+  align-content: center;
+}
+ 
+.proj-bx .proj-card-bx .proj-content-text, .proj-bx .proj-header-bx .proj-header-text  {
+  width: 90%;
+  margin: 20px auto;
+}
+.proj-bx .proj-card-bx .proj-content-text h1, .proj-bx .proj-header-bx .proj-header-text h1 {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  margin-bottom: 40px;
+  display: block;
+}
+
+contact
+.proj-bx .proj-card-bx .proj-content-text h1 {
+  font-size: 30px;
+}
+
+.proj-bx .proj-header-bx .proj-header-text h1 {
+  font-size: 45px;
+}
+
+.proj-bx .proj-card-bx .proj-content-text, .proj-bx .proj-header-bx .proj-header-text p {
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  margin-bottom: 60px;
+}
+
+.proj-bx .proj-card-bx img, .proj-bx .proj-header-bx img {
+  border-radius: 25px;
+  width: 75%;
+  margin: 20px auto;
+
+
+}
+
+
+
+/************ Question style ************/
+.question-contact-form {
+  color: white !important;
+  background-image: url('../public/assets/img/banner_background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 70px 0px 200px 0;
+}
+
+.question-contact-form h1 {
+  margin-bottom: 25px;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+
+.question-contact-form .question-contact-bx {
+  width: 95%;
+  margin: 0 auto;
+  
+}
+
+.question-contact-form .question-contact-bx .contact-details {
+  width: 90%;
+  margin-bottom: 150px;
+  padding-left: 2%;
+}
+.question-contact-form .question-contact-bx p {
+  
+  font-size: 16px;
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  line-height: 1.5em;
+}
+
+
+.question-contact-form .question-contact-bx .contact-details h3 {
+  margin-top: 40px;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.5em;
+
+}
+
+
+
+.question-contact-form .question-contact-bx .contact-details .socials-contact {
+  width: 75%;
+}
+
+
+.question-contact-form .question-contact-bx .contact-details .contact-social-logo img {
+  width: 100%;
+  height: auto;
+  margin-top: 15px;
+}
+
+.question-contact-form .question-bx {
+  background-color: white;
+  color: black !important;
+  border-radius: 25px;
+  padding: 3% 4% 3% 4%;
+}
+
+
+.question-contact-form .question-bx .question-headers {
+  padding-top: 5%;
+}
+
+.question-bx form {
+  margin-top: 4%;
+  margin-bottom: 5%;
+  
+}
+
+.question-bx form input, .question-bx form textarea {
+  background-color: transparent;
+  border-radius: 15px;
+  width: 100%;
+  border: 1px solid black;
+  padding: 14px 33px;
+  font-size: 20px;
+  font-weight: 600;
+  transition: 0.32 ease-in-out;
+  margin: 0 0 18px 0;
+}
+
+.question-bx form input::placeholder, .question-bx form textarea::placeholder {
+  font-size: 20px;
+  font-weight: 550;
+  opacity: 0.65;
+}
+
+.question-bx form input:focus::placeholder {
+  opacity: 0.95;
+}
+
+.question-bx form input:focus, .question-bx form textarea:focus {
+  background-color: #e1e1e1;
+}
+
+.question-bx form button {
   color: white;
+  font-size: 25px;
+  font-weight: 800;
+  background-color: #0c0390;
+  text-align: center;
+  border-radius: 25px;
+  margin-top: 17px;
+  padding: 15px 30px;
+  transition: 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.question-bx form button span {
+  z-index: 3;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.question-bx form button::before {
+  width: 0;
+  height: 100%;
+  right: 0;
+  top: 0;
+  content: "";
+  position: absolute;
+  border-radius: 25px;
+  background-color: rgb(0, 0, 0);
+  z-index: 2;
+  transition: 0.5s ease-in-out;
+
+}
+
+
+.question-bx form button:hover::before {
+  width: 100%;
+  content: "";
+
+}
+
+.question-bx form .res-status {
+  margin-top: 5%;
+}
+
+/************ Footer Css ************/
+
+
+.footer-bx {
+  width: 100%;
+  position: relative;
+  background-color: #0d062b;
+}
+
+/************ Footer subscribe form Css ************/
+
+.footer-bx .subscribe-form {
+  background-image: url('../public/assets/img/banner_background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 50px 2% 150px 2%;
+  position: relative;
+  color: black;
+}
+
+
+.footer-bx .subscribe-form h1 {
+  margin-bottom: 25px;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.footer-bx .subscribe-form p {
+  font-size: 16px;
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  line-height: 1.5em;
+  
+}
+
+.footer-bx .subscribe-form .subscribe-bx {
+  background-color: white;
+  border-radius: 25px;
+  padding: 2% 4% 2% 2%;
+}
+
+
+
+.footer-bx .subscribe-form .subscribe-bx .subscribe-headers {
+  width: 70%;
+  margin: 0 auto 2% auto;
+  padding-top: 2%;
+}
+
+
+.footer-bx .subscribe-form .subscribe-bx form {
+  width: 70%;
+  margin: 2% auto;
+}
+
+
+
+.footer-bx .subscribe-form .subscribe-bx form input {
+  background-color: transparent;
+  border-radius: 15px;
+  width: 100%;
+  border: 1px solid black;
+  padding: 14px 33px;
+  font-size: 20px;
+  font-weight: 600;
+  transition: 0.32 ease-in-out;
+  margin: 0 0 18px 0;
+}
+
+.footer-bx .subscribe-form .subscribe-bx form input::placeholder {
+  font-size: 20px;
+  font-weight: 550;
+  opacity: 0.65;
+}
+
+.footer-bx .subscribe-form .subscribe-bx form input:focus::placeholder {
+  opacity: 0.95;
+}
+
+.footer-bx .subscribe-form .subscribe-bx form input:focus {
+  background-color: #e1e1e1;
+}
+
+.footer-bx .subscribe-form .subscribe-bx form button {
+  position: relative;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  background-color: #0c0390;
+  font-size: 25px;
+  font-weight: 800;
+  border-radius: 25px;
+  margin: 17px 0;
+  padding: 15px 30px;
+  transition: 0.3s ease-in-out;
+}
+
+.footer-bx .subscribe-form .subscribe-bx form button span {
+  position: relative;
+  z-index: 2;
+}
+
+.footer-bx .subscribe-form .subscribe-bx form button::before {
+  top: 0;
+  right: 0;
+  background-color: #000;
+  border-radius: 25px;
+  z-index: 1;
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 100%;
+  transition: 0.5s ease-in-out;
+}
+
+.footer-bx .subscribe-form .subscribe-bx form button:hover::before {
+  content: "";
+  width: 100%;
+}
+
+/************ Footer section ************/
+
+.footer-bx .footer-section .col-contents, .footer-bx .footer-section .main-quote-col {
+  margin-right: 2%;
+  text-align: left;
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.footer-bx .footer-section .main-quote-col  {
+  align-content: center;
+ 
+}
+
+.footer-bx .footer-section .main-quote-col .footer-quote  {
+  width: 90%;
+  margin-bottom: 25px;
+}
+
+.footer-bx .footer-section .main-quote-col .footer-quote h1 {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+
+.footer-bx .footer-section .col-contents .follow-me-headers {
+  margin-bottom: 25px;
+}
+
+.footer-bx .footer-section .col-contents .follow-me-headers {
+  width: 90%;
+}
+
+.footer-bx .footer-section .col-contents .follow-me-social-icons {
+  width: 90%;
+}
+
+
+.footer-bx .footer-section .col-contents .follow-me-headers h1 {
+  margin-bottom: 25px;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.footer-bx .footer-section .col-contents .follow-me-headers p {
+  font-size: 16px;
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  line-height: 1.5em;
+}
+
+.footer-bx .footer-section .col-contents .follow-me-social-icons .social-icon {
+  padding: 0;
+  position: relative;
+}
+
+.footer-bx .footer-section .col-contents .follow-me-social-icons .social-icon img {
+  width: 100%;
+  max-width: 80px;
+  height: auto;
+}
+
+.footer-bx .footer-section .col-contents a {
+  text-decoration: none;
+}
+
+.col-contents .help-options, .col-contents .project-options {
+  margin-bottom: 15%;
+}
+
+.col-contents .help-options h1, .col-contents .project-options h1 {
+  margin-bottom: 5%;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.col-contents .help-options a, .col-contents .project-options a {
+  font-size: 16px;
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  line-height: 1.5em;
+  margin-bottom: 3%;
+  color: white;
+  opacity: 0.85;
+}
+
+.col-contents .help-options a:hover, .col-contents .project-options a:hover{
+  opacity: 1;
 }
