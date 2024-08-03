@@ -1,0 +1,20 @@
+[
+    {
+        "name":"Embedded Smart Vision for Human and Detection and Counting",
+        "message":"This is my graduated project. My group uses Jetson Nano with object detection model\nnamed 'YOLOv5' to detect intruder in restricted area and notify users when intruders have been detected. \n      Moreover we store every intruders data in google sheet and sqlite3 database."
+        
+    },
+    {
+        "name":"Iss detection",
+        "message":"This is my Python projects that will using REST API to detect ISS current location and compare with \n      specific location. Also sending some notify if ISS is so close to my specific location."
+        
+    },
+    {
+        "name":"Synchronous speed calculation",
+        "message":"This is my tkinter framework project. In this projects is using for calculating synchronous \n      speed by using tkinter responsive window." 
+    },
+    {
+        "name":"Rain detection",
+        "message":"This projects will using REST API to get rain data from specific position in next 12 hours \n      and notify to sms if the rain will occur."
+    }
+]
