@@ -1,27 +1,20 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
-import graduatedProj from "../assets/img/graduated-proj-pic.jpg";
-import issDetectProj from "../assets/img/iss-detect-proj-pic.jpg";
-import synSpeedCalProj from "../assets/img/tkinter-proj-pic.jpg";
-import stockPriceProj from "../assets/img/stock-price-proj-pic.jpg";
-import rainDetectProj from "../assets/img/rain-detect-pic.jpg";
-import projDetails from '../projects_data.json';
-import projHeaderPic from "../assets/img/proj-header-pic.png";
+import projDetails from "../projects_data.json";
 
-
-export const Projects = () => {
-
+export const Projects = ({imgParrentPath}) => {
+  
     const getProjImgNamed = (projName) => {
       if (projName === "Embedded Smart Vision for Human and Detection and Counting") {
-        return graduatedProj;
+        return imgParrentPath + "graduated-proj-pic.jpg";
       } else if (projName === "Iss detection") {
-        return issDetectProj;
+        return imgParrentPath + "iss-detect-proj-pic.jpg";
       } else if (projName === "Synchronous speed calculation") {
-        return synSpeedCalProj;
+        return imgParrentPath + "tkinter-proj-pic.jpg";
       } else if (projName === "Stock price detection") {
-        return stockPriceProj;
+        return imgParrentPath + "stock-price-proj-pic.jpg";
       }  else if (projName === "Rain detection") {
-        return rainDetectProj;
+        return imgParrentPath + "rain-detect-pic.jpg";
       } else {
         return ""
       }
@@ -43,7 +36,7 @@ export const Projects = () => {
           <Container>
             <Row className="proj-header-bx">
               <Col className="proj-col">
-                <img src={projHeaderPic} alt="proj-header-pic" />
+                <img src={imgParrentPath + "proj-header-pic.png"} alt="proj-header-pic" />
               </Col>
               <Col className="proj-col">
                 <div className="proj-header-text">

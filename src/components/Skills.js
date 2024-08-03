@@ -2,17 +2,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
-import pyLogo from '../assets/svg/python-pic.svg';
-import jsLogo from '../assets/svg/js-pic.svg';
-import htmlLogo from '../assets/svg/html-pic.svg';
-import cssLogo from '../assets/svg/css-pic.svg';
-import sqlLogo  from '../assets/svg/sql-pic.svg';
-import reactLogo from '../assets/svg/react-pic.svg';
-import requestsLogo from '../assets/svg/requests-pic.svg';
-import flaskLogo from '../assets/svg/flask-pic.svg';
-import smtpLogo from '../assets/svg/smtp-pic.svg';
 
 export const Skills = () => {
+  const svgParrentPath = process.env.PUBLIC_URL + "/assets/svg/";
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -52,23 +44,23 @@ export const Skills = () => {
               <Col>
               <Carousel responsive={responsive} infinite={true} className="skill-slider" >
                 <div className="item">
-                  <img src={pyLogo} />
+                  <img src={svgParrentPath + "python-pic.svg"} />
                   <h2>Python</h2>
                 </div>
                 <div className="item">
-                  <img src={sqlLogo} />
+                  <img src={svgParrentPath + "sql-pic.svg"} />
                   <h2>Sql</h2>
                 </div>
                 <div className="item">
-                  <img src={jsLogo} />
+                  <img src={svgParrentPath + "js-pic.svg"} />
                   <h2>Javascript</h2>
                 </div>
                 <div className="item">
-                  <img src={htmlLogo} />
+                  <img src={svgParrentPath + "html-pic.svg"} />
                   <h2>Html</h2>
                 </div>
                 <div className="item">
-                  <img src={cssLogo} />
+                  <img src={svgParrentPath + "css-pic.svg"} />
                   <h2>Css</h2>
                 </div>
               </Carousel>
@@ -88,19 +80,19 @@ export const Skills = () => {
             <Row>
               <Carousel responsive={responsive} infinite={true} className="skill-slider" >
                 <div className="item">
-                  <img src={requestsLogo} />
+                  <img src={svgParrentPath + "requests-pic.svg"} />
                   <h2>requests</h2>
                 </div>
                 <div className="item">
-                  <img src={reactLogo} />
+                  <img src={svgParrentPath + "react-pic.svg"} />
                   <h2>React</h2>
                 </div>
                 <div className="item">
-                  <img src={smtpLogo} />
+                  <img src={svgParrentPath + "smtp-pic.svg"} />
                   <h2>smtp</h2>
                 </div>
                 <div className="item">
-                  <img src={flaskLogo} />
+                  <img src={svgParrentPath + "flask-pic.svg"} />
                   <h2>flask</h2>
                 </div>
               </Carousel>

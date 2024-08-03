@@ -1,22 +1,15 @@
 import { useState } from "react"
-import { Container, Row, Col } from "react-bootstrap"
-import facebookLogo from "../assets/img/facebook-logo.png";
-import youtubeLogo from "../assets/img/youtube-logo.png";
-import igLogo from "../assets/img/instragram-logo.png";
-import githubLogo from "../assets/img/github-logo.png";
+import { Container, Row, Col } from "react-bootstrap";
 
-
-export const QuestionForm = () => {
-  
-
+export const QuestionForm = ({imgParrentPath}) => {
     const initialFormData = {
-        firstname:'',
-        lastname:'',
-        age:'',
-        email:'',
-        phone:'',
-        address:'',
-        message:''
+        firstname:"",
+        lastname:"",
+        age:"",
+        email:"",
+        phone:"",
+        address:"",
+        message:""
     };
 
     const [responseStatus, setResponseStatus] = useState({});
@@ -32,7 +25,7 @@ export const QuestionForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setButtonText('Sending...');
+        setButtonText("Sending...");
 
         let response = await fetch("http://localhost:5000/post_question", {
             method:"Post",
@@ -44,7 +37,7 @@ export const QuestionForm = () => {
         
         let result = await response.json();
         setFormData(initialFormData);
-        setButtonText('send');
+        setButtonText("send");
 
         setResponseStatus({isSuccess:true, message:"Question has been send successfully."});
 
@@ -104,16 +97,16 @@ export const QuestionForm = () => {
                 <h3>Social media :</h3>
                 <Row className="socials-contact">
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://facebook.com"><img src={facebookLogo} alt="facebook-logo" /></a>
+                    <a href="http://facebook.com"><img src={imgParrentPath + "facebook-logo.png"} alt="facebook-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="https://github.com/Pasit065"><img src={githubLogo} alt="github-logo" /></a>
+                    <a href="https://github.com/Pasit065"><img src={imgParrentPath + "github-logo.png"} alt="github-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://youtube.com"><img src={youtubeLogo} alt="youtube-logo" /></a>
+                    <a href="http://youtube.com"><img src={imgParrentPath + "youtube-logo.png"} alt="youtube-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://instragram.com"><img src={igLogo} alt="ig-logo" /></a>
+                    <a href="http://instragram.com"><img src={imgParrentPath + "instragram-logo.png"} alt="ig-logo" /></a>
                   </Col>
                 </Row>                
                 

@@ -1,16 +1,10 @@
 
 import { Container, Row, Col } from "react-bootstrap";
 import { MailchimpForm } from "./MailchimpForm";
-import facebookLogo from "../assets/img/facebook-logo.png";
-import igLogo from "../assets/img/instragram-logo.png";
-import githubLogo from "../assets/img/github-logo.png";
-import youtubeLogo from "../assets/img/youtube-logo.png";
 
-
-
-export const Footer = () => {
+export const Footer = ({imgParrentPath}) => {
     return (
-        <footer className='footer-bx'>
+        <footer className="footer-bx">
           <MailchimpForm />
           <Container className="footer-section">
             <Row>
@@ -32,16 +26,16 @@ export const Footer = () => {
                   <div className="follow-me-social-icons">
                     <Row>
                       <Col xs={2} sm={6} md={3}>
-                        <a href="http://www.facebook.com" className="social-icon" target="_blank"><img src={facebookLogo} alt="footer-facebook" /></a>
+                        <a href="http://www.facebook.com" className="social-icon" target="_blank"><img src={imgParrentPath + "facebook-logo.png"} alt="footer-facebook" /></a>
                       </Col>
                       <Col xs={2} sm={6} md={3}>
-                        <a href="http://www.instragram.com" className="social-icon"  target="_blank"><img src={igLogo} alt="footer-instragram" /></a>
+                        <a href="http://www.instragram.com" className="social-icon"  target="_blank"><img src={imgParrentPath + "instragram-logo.png"} alt="footer-instragram" /></a>
                       </Col>
                       <Col xs={2} sm={6} md={3}>
-                        <a href="https://github.com/Pasit065" className="social-icon"  target="_blank"><img src={githubLogo} alt="footer-github" /></a>
+                        <a href="https://github.com/Pasit065" className="social-icon"  target="_blank"><img src={imgParrentPath + "github-logo.png"} alt="footer-github" /></a>
                       </Col>
                       <Col xs={2} sm={6} md={3}>
-                        <a href="https://www.youtube.com/channel/UCGGZbe_cEkTwuvplWJg4Rhg" className="social-icon"  target="_blank"><img src={youtubeLogo} alt="footer-youtube" /></a>
+                        <a href="https://www.youtube.com/channel/UCGGZbe_cEkTwuvplWJg4Rhg" className="social-icon"  target="_blank"><img src={imgParrentPath + "youtube-logo.png"} alt="footer-youtube" /></a>
                       </Col>
                     </Row>
                   </div>

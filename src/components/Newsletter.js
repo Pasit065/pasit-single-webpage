@@ -3,9 +3,9 @@ import { Alert, Container, Row, Col } from "react-bootstrap";
 
 export const Newsletter = ({onValidate, status, message}) => {
     let initialSubscribeData = {
-        EMAIL: '',
-        FNAME: '',
-        LNAME: ''
+        EMAIL: "",
+        FNAME: "",
+        LNAME: ""
     };
 
     const [subscribeData, setSubscribeData] = useState(initialSubscribeData);
@@ -22,15 +22,15 @@ export const Newsletter = ({onValidate, status, message}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (subscribeData.EMAIL && subscribeData.EMAIL.indexOf('@') > -1) {
+        if (subscribeData.EMAIL && subscribeData.EMAIL.indexOf("@") > -1) {
             onValidate(subscribeData);
         }
     }
 
     useEffect(() => {
       const sendSuccessNotify = async() => {
-        let response = await fetch('http://localhost:5000/notify_users', {
-          method: 'post',
+        let response = await fetch("http://localhost:5000/notify_users", {
+          method: "post",
           headers: {
               "Content-Type":"Application/json;charset=utf-8"
           },
@@ -43,12 +43,12 @@ export const Newsletter = ({onValidate, status, message}) => {
       
       if (resData.code !== 200) {
         setNotifyStatus({
-          status: 'Incompleted',
+          status: "Incompleted",
           message: `Email notify about subscribe haven't been send.`});
       } else {
         setNotifyStatus(
           {
-            status: 'Completed',
+            status: "Completed",
             message: `Please check your email, if your subscription has been completed.`});
       }
       
@@ -102,7 +102,7 @@ export const Newsletter = ({onValidate, status, message}) => {
               <Col xs={12} sm={12}>
                 {
                   notifyStatus &&
-                  <p className={notifyStatus.status === 'Completed' ? 'complete': 'incomplete' }>{notifyStatus.status} and {notifyStatus.message}</p>
+                  <p className={notifyStatus.status === "Completed" ? "complete": "incomplete" }>{notifyStatus.status} and {notifyStatus.message}</p>
                 }
               </Col>
             </Row>

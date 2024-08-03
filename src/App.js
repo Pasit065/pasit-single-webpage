@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { NavBar } from './components/NavBar';
+import { Banner } from './components/Banner';
+import { Profile } from './components/Profile';
+import { Skills } from './components/Skills';
+import { Footer } from './components/Footer';
+import { Projects } from './components/Projects';
+import { QuestionForm } from './components/QuestionForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  
+  const imgParrentPath = process.env.PUBLIC_URL + '/assets/img/';
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar imgParrentPath={imgParrentPath} />
+      <Banner imgParrentPath={imgParrentPath}  />
+      <Profile imgParrentPath={imgParrentPath}  />
+      <Skills />
+      <Projects imgParrentPath={imgParrentPath} />
+      <QuestionForm imgParrentPath={imgParrentPath} />
+      <Footer imgParrentPath={imgParrentPath}  /> 
     </div>
   );
 }

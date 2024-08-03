@@ -1,8 +1,8 @@
-import { Row, Col, Container } from "react-bootstrap"
-import bannerImg from "../assets/img/banner-pic.png"
+import { Row, Col, Container } from "react-bootstrap";
 import TrackVisibility from "react-on-screen";
+import "animate.css";
 
-export const Banner = () => {
+export const Banner = ({imgParrentPath}) => {
     return (
         <section className="banner" id="home">
           <Container className="align-items-center">
@@ -17,7 +17,7 @@ export const Banner = () => {
                         experience and every knowledge in below section.</p>
                     </div> 
                     <div className="subscribe-link">
-                      <a href='#subscribe'>
+                      <a href="#subscribe">
                         <button href="#footer"><span>Subscirbe me</span></button>
                       </a>
                     </div>
@@ -25,7 +25,7 @@ export const Banner = () => {
                 </TrackVisibility>
               </Col>
               <Col xs={12} sm={8} xl={5} md={6} >
-                <img src={bannerImg} className="banner-img" alt="banner image"  />
+                <img src={imgParrentPath + "banner-pic.png"}  className="banner-img" alt="banner image"  />
               </Col>
             </Row>
           </Container>

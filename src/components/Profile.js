@@ -1,13 +1,12 @@
 import { Col, Container, Row } from "react-bootstrap";
-import profilePic from "../assets/img/profile-pic.png"; 
 
-export const Profile = () => {
+export const Profile = ({imgParrentPath}) => {
     return (
         <section className="profile-bx" id="about_me">
           <Container className="profile-container">
             <Row>
               <Col xs={12} md={5} xl={4} className="profile-img" >
-                <img src={profilePic} alt="My profile image" />
+                <img src={imgParrentPath + 'profile-pic.png'} alt="My profile image" />
               </Col>
               <Col xs={12} md={6} xl={7} className="personal-details">
                 <div className="personal-inform">
@@ -27,7 +26,7 @@ export const Profile = () => {
                     please feel free to asking me!!.
                   </p>
                   <div className="question-a">
-                    <a href='#question'>
+                    <a href="#question">
                       <button href="#question"><span>Ask me</span></button>
                     </a>
                   </div>
