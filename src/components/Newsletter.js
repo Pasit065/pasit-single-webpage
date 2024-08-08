@@ -39,9 +39,9 @@ export const Newsletter = ({onValidate, status, message}) => {
             name: `${subscribeData.FNAME} ${subscribeData.LNAME}`
       })
       });
-      let resData = await response.json();
+      let result = await response.json();
       
-      if (resData.code !== 200) {
+      if (result.code !== 200) {
         setNotifyStatus({
           status: "Incompleted",
           message: `Email notify about subscribe haven't been send.`});

@@ -11,6 +11,7 @@ const createEmailEmptyTables = () => {
         email_id INTEGER PRIMARY KEY AUTOINCREMENT,
         send_from TEXT NOT NULL,
         send_to TEXT NOT NULL,
+        sending_date TEXT,
         sending_time TEXT,
         is_success BOOLEAN NOT NULL
     
@@ -50,8 +51,6 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-
-
 Router.get('/is_total_emails_records_today', (req, res) => {
     const db = new sqlite3.Database('./emails_data.db');
     let total_emails_records_today = `
@@ -81,7 +80,7 @@ Router.get('/get_total_emails_records', (req, res) => {
     SELECT COUNT(*) total_records
     FROM email_send_records
 
-    WHERE sending_time = date('now', 'localtime')
+    WHERE sending_date = date('now', 'localtime')
     ` 
 
     db.get(count_total_emails_today, (err, row) => {
@@ -123,9 +122,8 @@ Router.post('/insert_email_records', (req, res) => {
     let new_email_data = req.body
 
     INSERT_NEW_EMAIL_RECORDS_ROW = `
-    INSERT INTO email_send_records(send_from, send_to, sending_time, is_success)
-    VALUES ('${new_email_data.send_from}', '${new_email_data.send_to}', date('now', 'localtime'), ${new_email_data.is_success})
-    
+    INSERT INTO email_send_records(send_from, send_to, sending_date, sending_time, is_success)
+    VALUES ('${new_email_data.send_from}', '${new_email_data.send_to}', date('now', 'localtime'), time('now', 'localtime'), ${new_email_data.is_success})
     `
     try {
         db.run(INSERT_NEW_EMAIL_RECORDS_ROW)

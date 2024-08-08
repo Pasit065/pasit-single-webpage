@@ -36,10 +36,15 @@ export const QuestionForm = ({imgParrentPath}) => {
         });
         
         let result = await response.json();
+
+        if (result.code === 200) {
+          setResponseStatus({isSuccess:true, message:"Question has been send successfully."});
+        } else {
+          setResponseStatus({isSuccess:false, message:"Failed to send message."});
+        }
+
         setFormData(initialFormData);
         setButtonText("send");
-
-        setResponseStatus({isSuccess:true, message:"Question has been send successfully."});
 
         response = await fetch("http://localhost:5000/insert_email_records", {
             method:"Post",
@@ -69,14 +74,6 @@ export const QuestionForm = ({imgParrentPath}) => {
               is_created_total_emails_records_today: isTotalEmailsRecordCreated.is_total_emails_records_today
           })
         });
-
-        if (result.code === 200) {
-            setResponseStatus({isSuccess:true, message:"Question has been send successfully."});
-            
-        } else {
-            setResponseStatus({isSuccess:false, message:"Failed to send message."});
-        }
-
     }
 
     return (
