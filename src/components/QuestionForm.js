@@ -94,16 +94,16 @@ export const QuestionForm = ({imgParrentPath}) => {
                 <h3>Social media :</h3>
                 <Row className="socials-contact">
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://facebook.com"><img src={imgParrentPath + "facebook-logo.png"} alt="facebook-logo" /></a>
+                    <a href="http://facebook.com" className="social-icon" target="_blank" ><img src={imgParrentPath + "facebook-logo.png"} alt="facebook-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="https://github.com/Pasit065"><img src={imgParrentPath + "github-logo.png"} alt="github-logo" /></a>
+                    <a href="https://github.com/Pasit065" className="social-icon" target="_blank" ><img src={imgParrentPath + "github-logo.png"} alt="github-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://youtube.com"><img src={imgParrentPath + "youtube-logo.png"} alt="youtube-logo" /></a>
+                    <a href="http://youtube.com" className="social-icon" target="_blank" ><img src={imgParrentPath + "youtube-logo.png"} alt="youtube-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://instragram.com"><img src={imgParrentPath + "instragram-logo.png"} alt="ig-logo" /></a>
+                    <a href="http://instragram.com" className="social-icon" target="_blank" ><img src={imgParrentPath + "instragram-logo.png"} alt="ig-logo" /></a>
                   </Col>
                 </Row>                
                 
