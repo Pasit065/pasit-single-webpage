@@ -1,44 +1,38 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const cors = require('cors');
-const sqlite3 = require('sqlite3');
+const express = require("express");
+const nodemailer = require("nodemailer");
+const cors = require("cors");
+const sqlite3 = require("sqlite3");
+const sqlQueries = require("./constant/sql-queries");
+const fileLocation = require("./constant/file-location");
+const email_repository = require("./repository/email-repository");
 
+const getReplacedQueries = (queries, mappingOldAndNewData) => {
+    let newQueries = queries;
+    for (let mappingData of mappingOldAndNewData) {
+        newQueries.replace(mappingData.oldValue, mappingData.newValue);
+    };
 
-const createEmailEmptyTables = () => {
-    const db = new sqlite3.Database("./emails_data.db")
+    return newQueries
+};
 
-    const CREATE_TABLE_EMAIL_RECORDS = `CREATE TABLE IF NOT EXISTS email_send_records(
-        email_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        send_from TEXT NOT NULL,
-        send_to TEXT NOT NULL,
-        sending_date TEXT,
-        sending_time TEXT,
-        is_success BOOLEAN NOT NULL
-    
-    )`
+// Determine new object for implement emails data in database.
+const emailRepository = new email_repository.EmailRepository(fileLocation.DATABASE, sqlQueries);
 
-    const CREATE_TABLE_TOTAL_EMAIL = `CREATE TABLE IF NOT EXISTS total_emails(
-        date TEXT NOT NULL,
-        total_clients_message INTEGER
-    )`
+// Create table if not exists.
+emailRepository.createEveryTables();
 
-    db.run(CREATE_TABLE_EMAIL_RECORDS)
-    db.run(CREATE_TABLE_TOTAL_EMAIL)
-
-    console.log('Tables have been created.')
-
-    db.close()
-
-}
-
-createEmailEmptyTables()
+// Initial setup variables.
 const Router = express.Router();
 const app = express();
 
+// Allow which users can connect server.
 app.use(cors());
 app.use(express.json());
+
+// Determine initial route path.
 app.use('/', Router)
 
+// Connect to port 5000.
 app.listen(5000, () => console.log('Backend server has been started.'))
 console.log(process.env.my_email)
 
@@ -51,47 +45,30 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+// Get total emails for today if it true it means in total emails table
+// it already has total emails counting for today.
 Router.get('/is_total_emails_records_today', (req, res) => {
-    const db = new sqlite3.Database('./emails_data.db');
-    let total_emails_records_today = `
-    SELECT COUNT(*) total_emails_in_today
-    FROM total_emails
+    isTotalEmailsRecordsToday = emailRepository.isTotalEmailsRecordsToday()
 
-    WHERE date = date('now', 'localtime')
-    ` 
-    db.get(total_emails_records_today, (err, row) => {
-        if (err) {
-            res.json({ERROR: 'Your requests has been failed.'})
-        }
-        if (row.total_emails_in_today) {
-            res.json({is_total_emails_records_today: true})
-        } else {
-            res.json({is_total_emails_records_today: false})
-        }
-    })
+    if (!isTotalEmailsRecordsToday) {
+        res.json({ERROR: 'Your requests has been failed.'});
+    }
 
-    db.close()
+    res.json(isTotalEmailsRecordsToday)
 })
 
-Router.get('/get_total_emails_records', (req, res) => {
-    const db = new sqlite3.Database('./emails_data.db');
+// Checks total emails that has been send for today (Including failed emails).
+Router.get('/get_total_emails_send_records_today', (req, res) => {
+    totalRecordsSendResponse = emailRepository.getTotalSendRecordsToday()
     
-    let count_total_emails_today = `
-    SELECT COUNT(*) total_records
-    FROM email_send_records
+    if (!totalRecordsSendResponse) {
+        res.json({ERROR: "Your requests has been failed."})
+    }
 
-    WHERE sending_date = date('now', 'localtime')
-    ` 
-
-    db.get(count_total_emails_today, (err, row) => {
-        if (err) {
-            res.json({ERROR: err})
-        }
-        
-        res.json({total_records_for_today: row.total_records})
-    })
+    res.json({total_records_for_today: row.total_records_for_today})
 })
 
+// Sending emails.
 Router.post("/post_question", (req, res) => {
     const formData = req.body;
     const mailMessge = {
@@ -116,56 +93,45 @@ Router.post("/post_question", (req, res) => {
     })
 })
 
+// Insert new email record after email has been send
 Router.post('/insert_email_records', (req, res) => {
-    const db = new sqlite3.Database('./emails_data.db')
+    let new_email_data = req.body;
+    let mappingPrevToNewColValues = [];
 
-    let new_email_data = req.body
-
-    INSERT_NEW_EMAIL_RECORDS_ROW = `
-    INSERT INTO email_send_records(send_from, send_to, sending_date, sending_time, is_success)
-    VALUES ('${new_email_data.send_from}', '${new_email_data.send_to}', date('now', 'localtime'), time('now', 'localtime'), ${new_email_data.is_success})
-    `
-    try {
-        db.run(INSERT_NEW_EMAIL_RECORDS_ROW)
-        db.close()
-    } catch(err) {
-    res.json({email_records_updated_status: "incompleted", code: 400})
+    for (let colName in new_email_data) {
+        mappingPrevToNewColValues = mappingPrevToNewColValues.concat([
+            {
+                oldValue: colName,
+                newValue: new_email_data[colName]
+            }
+        ])
     }
 
-    res.json({email_records_updated_status: "Completed", code: 200})
-    
-    })
+    const newReplacedQueries = getReplacedQueries(
+        emailRepository.sqlQueries.INSERT_NEW_EMAIL_SEND_RECORDS_ROW,
+        mappingPrevToNewColValues
+    )
 
-Router.post('/updated_total_emails_todays', (req, res) => {
-    let db = new sqlite3.Database('./emails_data.db')
-    
-    console.log(req.body)
+    responseObject = emailRepository.insertNewEmailsSendRecordsRow(
+        newReplacedQueries
+    )
 
-    if (!req.body.is_created_total_emails_records_today) {
-        let INSERT_NEW_EMAILS_RECORDS = `
-        INSERT INTO total_emails(date, total_clients_message) 
-        VALUES (date('now', 'localtime'), ${req.body.total_emails})`
-
-        db.run(INSERT_NEW_EMAILS_RECORDS)
-
-    } else {
-        console.log("done")
-        let UPDATED_TOTAL_EMAILS = `
-        UPDATE total_emails
-        SET total_clients_message = ${req.body.total_emails}
-
-        WHERE date = date('now', 'localtime')
-        `
-        db.run(UPDATED_TOTAL_EMAILS)
-        console.log("done")
-
-    }
-
-    db.close()
-
+    res.json(responseObject)
 })
 
+// Updated total emails.
+Router.post('/updated_total_emails_todays', (req, res) => {
+    try {
+        emailRepository.updatedTotalEmailsToday(req.body)
+    } catch(err) {
+        res.json({ERROR: "Failed to updated total emails table."})
+    }
 
+    res.json({status: 200, message: "total emails for today has been updated successfully."})
+   
+})
+
+// Notify users after users has subscribed.
 Router.post('/notify_users', (req, res) => {
     const mailMessge = {
         to: req.body.email,
@@ -184,3 +150,5 @@ Router.post('/notify_users', (req, res) => {
         }
     })
 })
+
+
