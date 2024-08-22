@@ -117,15 +117,15 @@ export const QuestionForm = ({imgParrentPath}) => {
                 <form onSubmit={handleSubmit}>
                   <Row>
                     <Col md={6}>
-                      <input type="text" placeholder="firstname" value={formData.firstname} onChange={(e) => handleFormChange('firstname', e.target.value)} />
+                        <input type="text" placeholder="firstname" title="Please fill this thing" value={formData.firstname} onChange={(e) => handleFormChange('firstname', e.target.value)} pattern="[a-zA_Z]{2,4}" title="Must be characters" required="required" />
                     </Col>
                     <Col md={6}>
-                      <input type="text" placeholder="lastname" value={formData.lastname} onChange={(e) => handleFormChange('lastname', e.target.value)} />
+                      <input type="text" placeholder="lastname" value={formData.lastname} onChange={(e) => handleFormChange('lastname', e.target.value)} required="required" />
                     </Col>
                   </Row>
                   <Row>
                     <Col md={6}>
-                      <input type="number" placeholder="age" value={formData.age} onChange={(e) => handleFormChange('age', e.target.value)} />
+                      <input type="number" placeholder="age" value={formData.age} onChange={(e) => handleFormChange('age', e.target.value)} required="required" />
                     </Col>
                     <Col md={6}>
                       <input type="tel" placeholder="phone number" value={formData.phone} onChange={(e) => handleFormChange('phone', e.target.value)} />
@@ -133,7 +133,7 @@ export const QuestionForm = ({imgParrentPath}) => {
                   </Row>
                   <Row>
                     <Col>
-                      <input type="email" placeholder="email" value={formData.email} onChange={(e) => handleFormChange('email', e.target.value)} />
+                      <input type="email" placeholder="email" value={formData.email} onChange={(e) => handleFormChange('email', e.target.value)} required="required" />
                     </Col>
                   </Row>
                   <Row>
@@ -143,7 +143,7 @@ export const QuestionForm = ({imgParrentPath}) => {
                   </Row>
                   <Row>
                     <Col>
-                      <textarea rows={4} type="text" placeholder="message" value={formData.message} onChange={(e) => handleFormChange('message', e.target.value)} />
+                      <textarea rows={4} type="text" placeholder="message" value={formData.message} onChange={(e) => handleFormChange('message', e.target.value)} title="Lsss" required="required" />
                       <button type="submit"><span>{buttonText}</span></button>
                     </Col>
                   </Row>

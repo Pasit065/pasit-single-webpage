@@ -1,29 +1,13 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
-import projDetails from "../projects_data.json";
+import PROJECT_DETAILS from "../constant/projects-details"
 
-export const Projects = ({imgParrentPath}) => {
+
+export const Projects = ({ imgParrentPath }) => {
   
-    const getProjImgNamed = (projName) => {
-      if (projName === "Embedded Smart Vision for Human and Detection and Counting") {
-        return imgParrentPath + "graduated-proj-pic.jpg";
-      } else if (projName === "Iss detection") {
-        return imgParrentPath + "iss-detect-proj-pic.jpg";
-      } else if (projName === "Synchronous speed calculation") {
-        return imgParrentPath + "tkinter-proj-pic.jpg";
-      } else if (projName === "Stock price detection") {
-        return imgParrentPath + "stock-price-proj-pic.jpg";
-      }  else if (projName === "Rain detection") {
-        return imgParrentPath + "rain-detect-pic.jpg";
-      } else {
-        return ""
-      }
-    };
-
-    const projCards = projDetails.map((proj, index) => {
+    const projCards = PROJECT_DETAILS.map((proj, index) => {
       try {
-        proj.projImg = getProjImgNamed(proj.name);
-        if (!proj.projimg) throw "unknown image path";
+        if (!proj.fileLocation) throw "unknown image path";
       } catch (error) {
         console.log(`Image of projects named ${proj.name} is invalid. Because of ${error}`);
       }
