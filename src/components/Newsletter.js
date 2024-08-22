@@ -75,7 +75,7 @@ export const Newsletter = ({onValidate, status, message}) => {
                   <p>If you like our website you can support us with this subscribe.</p>
                   {status === "sending" && <Alert>{status}...</Alert>}
                   {status === "error" && <Alert>{status} and {message}!!!</Alert>}
-                  {status === "success" && <Alert>Congraduation!! Your subscribe has been complete!!!</Alert>}
+                  {status === "success" && <Alert>{message} your subscribe has been complete!!!</Alert>}
                 </div>
               </Col>
             </Row>
@@ -83,15 +83,15 @@ export const Newsletter = ({onValidate, status, message}) => {
               <form onSubmit={handleSubmit}>
                 <Row>
                   <Col>
-                    <input type="email" placeholder="Email address" value={subscribeData.EMAIL} onChange={(e) => handleChange(e.target.value, 'EMAIL')} />
+                    <input type="email" placeholder="email address" value={subscribeData.EMAIL} onChange={(e) => handleChange(e.target.value, 'EMAIL')} required="required" />
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={12} sm={6}>
-                    <input type="text" placeholder="First name" value={subscribeData.FNAME} onChange={(e) => handleChange(e.target.value, 'FNAME')} />
+                    <input type="text" placeholder="firstname" value={subscribeData.FNAME} onChange={(e) => handleChange(e.target.value, 'FNAME')} required="required" />
                   </Col>
                   <Col xs={12} sm={6}>
-                    <input type="text" placeholder="Last name" value={subscribeData.LNAME} onChange={(e) => handleChange(e.target.value, 'LNAME')} />                
+                    <input type="text" placeholder="lastname" value={subscribeData.LNAME} onChange={(e) => handleChange(e.target.value, 'LNAME')} required="required" />                
                   </Col> 
                 </Row>
                 <button type="submit"><span>Submit</span></button>

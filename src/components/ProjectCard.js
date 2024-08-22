@@ -14,7 +14,7 @@ export const ProjectCard = ({projData}) => {
               </div>
             </Col>
             <Col xs={12} md={6} className="proj-col">
-              <img src={projData.projImg} alt="proj-img" />
+              <img src={projData.fileLocation} alt="proj-img" />
             </Col>
           </Row>
         </Container>
