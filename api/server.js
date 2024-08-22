@@ -25,7 +25,7 @@ const fileLocation = new FileLocation();
 const createTableQueries = new CreateTableQueries();
 const getTotalRowQueries = new GetTotalRowQueries();
 const insertTableQueries = new InsertTableQueries();
-const updateTableQueries = new UpdateTableQueries()
+const updateTableQueries = new UpdateTableQueries();
 // Determine email repository that can access and implement 
 // every data in sqlite3 table.
 const emailRepository = new EmailRepository(fileLocation.DATABASE_FILE)
@@ -129,19 +129,12 @@ Router.post('/insert_email_records', (req, res) => {
 
 // Updated total emails.
 Router.post('/updated_total_emails_todays', (req, res) => {
-    try {
-        emailRepository.updatedTotalEmailsToday(
-            req.body,
-            insertTableQueries.INSERT_NEW_TOTAL_EMAILS_ROW,
-            updateTableQueries.
-
+    emailRepository.updatedTotalEmailsToday(
+        req.body,
+        insertTableQueries.INSERT_NEW_TOTAL_EMAILS_ROW,
+        updateTableQueries.UPDATE_TOTAL_EMAILS,
+        res
     )
-    } catch(err) {
-        res.json({ERROR: "Failed to updated total emails table."})
-    }
-
-    res.json({status: 200, message: "total emails for today has been updated successfully."})
-   
 })
 
 // Notify users after users has subscribed.
