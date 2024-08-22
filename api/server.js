@@ -1,10 +1,13 @@
-const express = require("express");
-const nodemailer = require("nodemailer");
-const cors = require("cors");
-const sqlite3 = require("sqlite3");
-const sqlQueries = require("./constant/sql-queries");
-const fileLocation = require("./constant/file-location");
-const email_repository = require("./repository/email-repository");
+
+import express from "express";
+import nodemailer from "nodemailer";
+import cors from "cors";
+import EmailRepository from "./repository/email-repository.js";
+import CreateTableQueries from "./constant/create-table-queries.js";
+import GetTotalRowQueries from "./constant/get-total-row-queries.js";
+import InsertTableQueries from "./constant/insert-table-queries.js";
+import UpdateTableQueries from "./constant/update-table-queries.js"
+import FileLocation from './constant/file-location.js';
 
 const getReplacedQueries = (queries, mappingOldAndNewData) => {
     let newQueries = queries;
@@ -15,11 +18,23 @@ const getReplacedQueries = (queries, mappingOldAndNewData) => {
     return newQueries
 };
 
-// Determine new object for implement emails data in database.
-const emailRepository = new email_repository.EmailRepository(fileLocation.DATABASE, sqlQueries);
+// Determine file location object.
+const fileLocation = new FileLocation();
+
+// Determine sql queries object for seperated parts.
+const createTableQueries = new CreateTableQueries();
+const getTotalRowQueries = new GetTotalRowQueries();
+const insertTableQueries = new InsertTableQueries();
+const updateTableQueries = new UpdateTableQueries()
+// Determine email repository that can access and implement 
+// every data in sqlite3 table.
+const emailRepository = new EmailRepository(fileLocation.DATABASE_FILE)
 
 // Create table if not exists.
-emailRepository.createEveryTables();
+emailRepository.createEveryTables([
+    createTableQueries.CREATE_EMAIL_SEND_RECORDS_TABLE,
+    createTableQueries.CREATE_TOTAL_EMAILS_TABLE
+]);
 
 // Initial setup variables.
 const Router = express.Router();
@@ -48,24 +63,18 @@ const transporter = nodemailer.createTransport({
 // Get total emails for today if it true it means in total emails table
 // it already has total emails counting for today.
 Router.get('/is_total_emails_records_today', (req, res) => {
-    isTotalEmailsRecordsToday = emailRepository.isTotalEmailsRecordsToday()
-
-    if (!isTotalEmailsRecordsToday) {
-        res.json({ERROR: 'Your requests has been failed.'});
-    }
-
-    res.json(isTotalEmailsRecordsToday)
+    emailRepository.isTotalEmailsRecordsToday(
+        getTotalRowQueries.GET_TOTAL_EMAILS_IN_TODAY,
+        res
+    );
 })
 
 // Checks total emails that has been send for today (Including failed emails).
 Router.get('/get_total_emails_send_records_today', (req, res) => {
-    totalRecordsSendResponse = emailRepository.getTotalSendRecordsToday()
-    
-    if (!totalRecordsSendResponse) {
-        res.json({ERROR: "Your requests has been failed."})
-    }
-
-    res.json({total_records_for_today: row.total_records_for_today})
+   emailRepository.getTotalEmailsSendRecordsToday(
+        getTotalRowQueries.GET_TOTAL_SEND_RECORDS_FOR_TODAY,
+        res
+    )
 })
 
 // Sending emails.
@@ -108,21 +117,25 @@ Router.post('/insert_email_records', (req, res) => {
     }
 
     const newReplacedQueries = getReplacedQueries(
-        emailRepository.sqlQueries.INSERT_NEW_EMAIL_SEND_RECORDS_ROW,
+        insertTableQueries.INSERT_NEW_EMAIL_SEND_RECORDS_ROW,
         mappingPrevToNewColValues
     )
 
     responseObject = emailRepository.insertNewEmailsSendRecordsRow(
-        newReplacedQueries
+        newReplacedQueries,
+        res
     )
-
-    res.json(responseObject)
 })
 
 // Updated total emails.
 Router.post('/updated_total_emails_todays', (req, res) => {
     try {
-        emailRepository.updatedTotalEmailsToday(req.body)
+        emailRepository.updatedTotalEmailsToday(
+            req.body,
+            insertTableQueries.INSERT_NEW_TOTAL_EMAILS_ROW,
+            updateTableQueries.
+
+    )
     } catch(err) {
         res.json({ERROR: "Failed to updated total emails table."})
     }
@@ -150,5 +163,3 @@ Router.post('/notify_users', (req, res) => {
         }
     })
 })
-
-
