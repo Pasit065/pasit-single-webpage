@@ -1,70 +1,82 @@
-// const sqlQueries = require("../constant/sql-queries")
+
+import sqlite3 from "sqlite3";
+
 class EmailRepository 
 {   
-    constructor(fileLocation, sqlQueries) {
+    constructor(fileLocation) {
         this.fileLocation = fileLocation;
-        this.sqlQueries = sqlQueries
     }
 
-    createEveryTables() {
+    createEveryTables(createTableQueries) {
         const db = new sqlite3.Database(this.fileLocation)
 
-        db.run(this.sqlQueries.CREATE_EMAIL_SEND_RECORDS_TABLE)
-        db.run(this.sqlQueries.CREATE_TOTAL_EMAILS_TABLE)
+        console.log(typeof createTableQueries)
+
+        if (typeof createTableQueries !== "object") {
+            throw ("Only list of queries are allowed.");
+        }
+        for (let queries of createTableQueries) {
+            db.run(queries)
+        }
+
         console.log('Tables have been created.')
-    
         db.close()
     }
 
-    isTotalEmailsRecordsToday()  {
+    isTotalEmailsRecordsToday (getTotalEmailsInTodayQueries, res)  {
         const db = new sqlite3.Database(this.fileLocation)
 
-        db.get(this.sqlQueries.GET_TOTAL_EMAILS_IN_TODAY, (err, row) => {
+        db.get(getTotalEmailsInTodayQueries, (err, row) => {
+            console.log(row)
+            if (err) {
+                res.json({ERROR: "Can't access to total emails table."});
+            }
             if (row.total_emails_in_today) {
-                return true
+                res.json({is_total_emails_records_today: true})
             } else {
-                return false
+                res.json({is_total_emails_records_today: false})
             }
         })
     
         db.close()
     }
 
-    getTotalSendRecordsToday() {
+    getTotalEmailsSendRecordsToday(getTotalSendRecordsForTodayQueries, res) {
         const db = new sqlite3.Database(this.fileLocation);
 
-        db.get(this.sqlQueries.GET_TOTAL_SEND_RECORDS_FOR_TODAY, (err, row) => {
-            return {total_records_for_today: row.total_records_for_today}
+        db.get(getTotalSendRecordsForTodayQueries, (err, row) => {
+            if (err) {
+                res.json({ERROR: "Failed to get total emails end for today."})
+            }
+            
+            res.json({total_records_for_today: row.total_records_for_today})
         })
     }
 
-    insertNewEmailsSendRecordsRow(editedQueries) {
+    insertNewEmailsSendRecordsRow(editedQueries, res) {
         const db = new sqlite3.Database(this.fileLocation)
     
         try {
             db.run(editedQueries);
             db.close();
         } catch(err) {
-            return {email_records_updated_status: "incompleted", code: 400};
+            res.json({email_records_updated_status: "incompleted", code: 400});
         }
-
-            return {email_records_updated_status: "Completed", code: 200}
+            res.json({email_records_updated_status: "Completed", code: 200});
     }
 
-    isUpdatedTotalEmailsToday(bodyParmas) {
+    updatedTotalEmailsToday(bodyParmas, insertNewTotalEmailsRowQueries) {
         let db = new sqlite3.Database(this.fileLocation)
         
         if (!bodyParmas.is_created_total_emails_records_today) {
-            let insertNewEmailsRecordsQueries = this.sqlite3.INSERT_NEW_TOTAL_EMAILS_ROW;
-
-            insertNewEmailsRecordsQueries = insertNewEmailsRecords.replace(
+            insertNewTotalEmailsRowQueries = insertNewTotalEmailsRowQueries.replace(
                 `totalClientsMessage`, bodyParmas.total_emails
             )
     
             db.run(insertNewEmailsRecordsQueries);
 
         } else {
-            let updatedTotalEmailsQueries = this.sqlQueries.UPDATED_TOTAL_EMAILS;
+            let updatedTotalEmailsQueries = ;
             updatedTotalEmailsQueries = updatedTotalEmailsQueries.replace(
                 'totalClientsMessage', bodyParmas.total_emails
             )
@@ -79,7 +91,6 @@ class EmailRepository
 
 }
 
-exports.EmailRepository =  EmailRepository;
-
+export default EmailRepository;
 
 
