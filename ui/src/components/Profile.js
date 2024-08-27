@@ -1,12 +1,16 @@
 import { Col, Container, Row } from "react-bootstrap";
+import PngFilePaths from "../constant/png-file-paths"
 
-export const Profile = ({imgParrentPath}) => {
+export const Profile = ({ imgParrentPath }) => {
+
+    const pngFilePaths = new PngFilePaths(imgParrentPath);
+
     return (
         <section className="profile-bx" id="about_me">
           <Container className="profile-container">
             <Row>
               <Col xs={12} md={5} xl={4} className="profile-img" >
-                <img src={imgParrentPath + 'profile-pic.png'} alt="My profile image" />
+                <img src={pngFilePaths.PROFILE_PIC} alt="My profile image" />
               </Col>
               <Col xs={12} md={6} xl={7} className="personal-details">
                 <div className="personal-inform">

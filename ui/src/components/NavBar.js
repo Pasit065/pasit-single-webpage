@@ -1,8 +1,9 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { useState } from "react";
-
+import PngFilePaths from "../constant/png-file-paths";
 
 export const NavBar = ({imgParrentPath}) => {
+    const pngFilePaths = new PngFilePaths(imgParrentPath)
     const [activeLink, setActiveLink] = useState("home");
     
     const onUpdateActiveLink = (newActiveLink) => {
@@ -12,7 +13,7 @@ export const NavBar = ({imgParrentPath}) => {
     return (
     <Navbar expand="lg" className="navbar-bx">
       <Container>
-        <Navbar.Brand href="#home" className="brand"><img src={imgParrentPath + "navbar-logo.png"} className="big" /></Navbar.Brand>
+        <Navbar.Brand href="#home" className="brand"><img src={pngFilePaths.NAVBAR_LOGO} className="big" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
           <span className="navbar-toggler-icon"></span>
         </Navbar.Toggle>

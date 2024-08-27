@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { Container, Row, Col } from "react-bootstrap";
+import PngFilePaths from "../constant/png-file-paths";
+import UrlStorage from "../constant/url-storage";
 
-export const QuestionForm = ({imgParrentPath}) => {
+export const QuestionForm = ({ imgParrentPath }) => {
     const initialFormData = {
         firstname:"",
         lastname:"",
@@ -12,9 +14,12 @@ export const QuestionForm = ({imgParrentPath}) => {
         message:""
     };
 
+    const pngFilePaths = new PngFilePaths(imgParrentPath);
+    const urlStorage = new UrlStorage()
+
     const [responseStatus, setResponseStatus] = useState({});
     const [formData, setFormData] = useState(initialFormData);
-    const [buttonText, setButtonText] = useState('send');
+    const [buttonText, setButtonText] = useState("send");
 
     const handleFormChange = (title, value) => {
         setFormData({
@@ -94,16 +99,16 @@ export const QuestionForm = ({imgParrentPath}) => {
                 <h3>Social media :</h3>
                 <Row className="socials-contact">
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://facebook.com" className="social-icon" target="_blank" ><img src={imgParrentPath + "facebook-logo.png"} alt="facebook-logo" /></a>
+                    <a href={urlStorage.FACEBOOK_URL} className="social-icon" target="_blank" ><img src={pngFilePaths.FACEBOOK_LOGO} alt="facebook-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="https://github.com/Pasit065" className="social-icon" target="_blank" ><img src={imgParrentPath + "github-logo.png"} alt="github-logo" /></a>
+                    <a href={urlStorage.GITHUB_URL} className="social-icon" target="_blank" ><img src={pngFilePaths.GITHUB_LOGO} alt="github-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://youtube.com" className="social-icon" target="_blank" ><img src={imgParrentPath + "youtube-logo.png"} alt="youtube-logo" /></a>
+                    <a href={urlStorage.YOUTUBE_URL} className="social-icon" target="_blank" ><img src={pngFilePaths.YOUTUBE_LOGO} alt="youtube-logo" /></a>
                   </Col>
                   <Col xs={3} sm={3} md={3} className="contact-social-logo">
-                    <a href="http://instragram.com" className="social-icon" target="_blank" ><img src={imgParrentPath + "instragram-logo.png"} alt="ig-logo" /></a>
+                    <a href={urlStorage.INSTRAGRAM_URL} className="social-icon" target="_blank" ><img src={pngFilePaths.INSTRAGRAM_LOGO} alt="ig-logo" /></a>
                   </Col>
                 </Row>                
                 
@@ -117,7 +122,7 @@ export const QuestionForm = ({imgParrentPath}) => {
                 <form onSubmit={handleSubmit}>
                   <Row>
                     <Col md={6}>
-                        <input type="text" placeholder="firstname" title="Please fill this thing" value={formData.firstname} onChange={(e) => handleFormChange('firstname', e.target.value)} pattern="[a-zA_Z]{2,4}" title="Must be characters" required="required" />
+                        <input type="text" placeholder="firstname" title="Please fill this thing" value={formData.firstname} onChange={(e) => handleFormChange('firstname', e.target.value)} pattern="[a-zA_Z]{2,4}" required="required" />
                     </Col>
                     <Col md={6}>
                       <input type="text" placeholder="lastname" value={formData.lastname} onChange={(e) => handleFormChange('lastname', e.target.value)} required="required" />

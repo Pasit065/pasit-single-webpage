@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-export const ProjectCard = ({projData}) => {
+export const ProjectCard = ({ projData }) => {
     return (
         <Container className="proj-card-bx" id={
           projData.name === "Embedded Smart Vision for Human and Detection and Counting"? "graduated_project": projData.name

@@ -46,23 +46,23 @@ export const Skills = () => {
               <Col>
               <Carousel responsive={responsive} infinite={true} className="skill-slider" >
                 <div className="item">
-                  <img src={svgFilePaths.PYTHON_PIC} />
+                  <img src={svgFilePaths.PYTHON_PIC} alt="python logo" />
                   <h2>Python</h2>
                 </div>
                 <div className="item">
-                  <img src={svgFilePaths.SQL_PIC} />
+                  <img src={svgFilePaths.SQL_PIC} alt="sql logo" />
                   <h2>Sql</h2>
                 </div>
                 <div className="item">
-                  <img src={svgFilePaths.JS_PIC} />
+                  <img src={svgFilePaths.JS_PIC} alt="javascripts logo" />
                   <h2>Javascript</h2>
                 </div>
                 <div className="item">
-                  <img src={svgFilePaths.HTML_PIC} />
+                  <img src={svgFilePaths.HTML_PIC} alt="html logo" />
                   <h2>Html</h2>
                 </div>
                 <div className="item">
-                  <img src={svgFilePaths.CSS_PIC} />
+                  <img src={svgFilePaths.CSS_PIC} alt="css logo" />
                   <h2>Css</h2>
                 </div>
               </Carousel>

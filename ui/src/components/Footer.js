@@ -1,8 +1,13 @@
 
 import { Container, Row, Col } from "react-bootstrap";
 import { MailchimpForm } from "./MailchimpForm";
+import UrlStorage from "../constant/url-storage";
+import PngFilePaths from "../constant/png-file-paths";
 
 export const Footer = ({imgParrentPath}) => {
+    const urlStorage = new UrlStorage();
+    const pngFilePaths = new PngFilePaths(imgParrentPath);
+
     return (
         <footer className="footer-bx">
           <MailchimpForm />
@@ -26,16 +31,16 @@ export const Footer = ({imgParrentPath}) => {
                   <div className="follow-me-social-icons">
                     <Row>
                       <Col xs={2} sm={6} md={3}>
-                        <a href="http://www.facebook.com" className="social-icon" target="_blank"><img src={imgParrentPath + "facebook-logo.png"} alt="footer-facebook" /></a>
+                        <a href={urlStorage.FACEBOOK_URL} className="social-icon" target="_blank"><img src={pngFilePaths.FACEBOOK_LOGO} alt="footer-facebook" /></a>
                       </Col>
                       <Col xs={2} sm={6} md={3}>
-                        <a href="http://www.instragram.com" className="social-icon"  target="_blank"><img src={imgParrentPath + "instragram-logo.png"} alt="footer-instragram" /></a>
+                        <a href={urlStorage.INSTRAGRAM_URL} className="social-icon"  target="_blank"><img src={pngFilePaths.INSTRAGRAM_LOGO} alt="footer-instragram" /></a>
                       </Col>
                       <Col xs={2} sm={6} md={3}>
-                        <a href="https://github.com/Pasit065" className="social-icon"  target="_blank"><img src={imgParrentPath + "github-logo.png"} alt="footer-github" /></a>
+                        <a href={urlStorage.GITHUB_URL} className="social-icon"  target="_blank"><img src={pngFilePaths.GITHUB_LOGO} alt="footer-github" /></a>
                       </Col>
                       <Col xs={2} sm={6} md={3}>
-                        <a href="https://www.youtube.com/channel/UCGGZbe_cEkTwuvplWJg4Rhg" className="social-icon"  target="_blank"><img src={imgParrentPath + "youtube-logo.png"} alt="footer-youtube" /></a>
+                        <a href={urlStorage.YOUTUBE_URL} className="social-icon"  target="_blank"><img src={pngFilePaths.YOUTUBE_LOGO} alt="footer-youtube" /></a>
                       </Col>
                     </Row>
                   </div>
