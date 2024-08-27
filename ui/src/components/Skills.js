@@ -2,28 +2,32 @@
 import { Container, Row, Col } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
+import SvgFilePaths from "../constant/svg-file-paths";
 
 export const Skills = () => {
-  const svgParrentPath = process.env.PUBLIC_URL + "/assets/svg/";
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  };
+  // Determine 'svgFilePath' objects.
+    const svgParrentPath = process.env.PUBLIC_URL + "/assets/svg/";
+    const svgFilePaths = new SvgFilePaths(svgParrentPath);
+
+    const responsive = {
+      superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5
+      },
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3
+      },
+      tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2
+      },
+      mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+      }
+    };
 
     return (
         <section className="skill" id="skills">
@@ -42,23 +46,23 @@ export const Skills = () => {
               <Col>
               <Carousel responsive={responsive} infinite={true} className="skill-slider" >
                 <div className="item">
-                  <img src={svgParrentPath + "python-pic.svg"} />
+                  <img src={svgFilePaths.PYTHON_PIC} />
                   <h2>Python</h2>
                 </div>
                 <div className="item">
-                  <img src={svgParrentPath + "sql-pic.svg"} />
+                  <img src={svgFilePaths.SQL_PIC} />
                   <h2>Sql</h2>
                 </div>
                 <div className="item">
-                  <img src={svgParrentPath + "js-pic.svg"} />
+                  <img src={svgFilePaths.JS_PIC} />
                   <h2>Javascript</h2>
                 </div>
                 <div className="item">
-                  <img src={svgParrentPath + "html-pic.svg"} />
+                  <img src={svgFilePaths.HTML_PIC} />
                   <h2>Html</h2>
                 </div>
                 <div className="item">
-                  <img src={svgParrentPath + "css-pic.svg"} />
+                  <img src={svgFilePaths.CSS_PIC} />
                   <h2>Css</h2>
                 </div>
               </Carousel>
@@ -78,19 +82,19 @@ export const Skills = () => {
             <Row>
               <Carousel responsive={responsive} infinite={true} className="skill-slider" >
                 <div className="item">
-                  <img src={svgParrentPath + "requests-pic.svg"} />
+                  <img src={svgFilePaths.REQUESTS_PIC} />
                   <h2>requests</h2>
                 </div>
                 <div className="item">
-                  <img src={svgParrentPath + "react-pic.svg"} />
+                  <img src={svgFilePaths.REACT_PIC} />
                   <h2>React</h2>
                 </div>
                 <div className="item">
-                  <img src={svgParrentPath + "smtp-pic.svg"} />
+                  <img src={svgFilePaths.SMTP_PIC} />
                   <h2>smtp</h2>
                 </div>
                 <div className="item">
-                  <img src={svgParrentPath + "flask-pic.svg"} />
+                  <img src={svgFilePaths.FLASK_PIC} />
                   <h2>flask</h2>
                 </div>
               </Carousel>
