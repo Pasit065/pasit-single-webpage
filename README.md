@@ -14,6 +14,22 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+`npm start` also execute command that you've define in `package.json`
+
+For example if in `package.json` "scripts" is:
+
+```
+"scripts": {
+    "start": "cd ./ui/ && react-script start"
+}
+```
+
+Which means you are going to `ui` directory and execute `react-script start`
+
+### `react-script start` 
+`react-script start` will find `package.json` file for initial configuration and find 
+`main` file that will be executed.
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\

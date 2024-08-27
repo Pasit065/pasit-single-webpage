@@ -25,8 +25,6 @@ export const Skills = () => {
     }
   };
 
-
-
     return (
         <section className="skill" id="skills">
           <Container className="skill-bx">
