@@ -10,7 +10,6 @@ class InsertTableQueries {
         INSERT INTO total_emails(date, total_clients_message) 
         VALUES (date('now', 'localtime'), totalClientsMessage)
         `
-        
     }
 }
 

@@ -121,7 +121,7 @@ Router.post('/insert_email_records', (req, res) => {
         mappingPrevToNewColValues
     )
 
-    responseObject = emailRepository.insertNewEmailsSendRecordsRow(
+    emailRepository.insertNewEmailsSendRecordsRow(
         newReplacedQueries,
         res
     )

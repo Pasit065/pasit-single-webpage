@@ -65,30 +65,33 @@ class EmailRepository
             res.json({email_records_updated_status: "Completed", code: 200});
     }
 
-    updatedTotalEmailsToday(bodyParmas, insertNewTotalEmailsRowQueries) {
+    updatedTotalEmailsToday(bodyParmas, insertNewTotalEmailsRowQueries, updateTotalEmailsQueries, res) {
         let db = new sqlite3.Database(this.fileLocation)
-        
-        if (!bodyParmas.is_created_total_emails_records_today) {
-            insertNewTotalEmailsRowQueries = insertNewTotalEmailsRowQueries.replace(
-                `totalClientsMessage`, bodyParmas.total_emails
-            )
+
+        try {
+            if (!bodyParmas.is_created_total_emails_records_today) {
+                insertNewTotalEmailsRowQueries = insertNewTotalEmailsRowQueries.replace(
+                    `totalClientsMessage`, bodyParmas.total_emails
+                )
     
-            db.run(insertNewEmailsRecordsQueries);
+                db.run(insertNewEmailsRecordsQueries);
 
-        } else {
-            let updatedTotalEmailsQueries = ;
-            updatedTotalEmailsQueries = updatedTotalEmailsQueries.replace(
-                'totalClientsMessage', bodyParmas.total_emails
-            )
+            } else {
+                updateTotalEmailsQueries = updateTotalEmailsQueries.replace(
+                    'totalClientsMessage', bodyParmas.total_emails
+                )
 
-            db.run(updatedTotalEmailsQueries)
+                db.run(updateTotalEmailsQueries)
+            }
+    
+            db.close()
+
+        } catch(err) {
+            res.json({ERROR: "Failed to updated total emails table."})
         }
-    
-        db.close()
 
+        res.json({status: 200, message: "total emails for today has been updated successfully."})
     }
-
-
 }
 
 export default EmailRepository;
