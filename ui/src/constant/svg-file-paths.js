@@ -12,4 +12,4 @@ class SvgFilesPath {
     }
 }
 
-export default SvgFilesPath
+export default SvgFilesPath;
