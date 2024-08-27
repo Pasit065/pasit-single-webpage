@@ -13,7 +13,7 @@ class FormRequestsService {
             body:JSON.stringify(formData)
         });
 
-        return await response.json();
+        return response.json();
     }
 
     async postInsertEmailRecords(formData, emailResultCode) {
@@ -30,12 +30,12 @@ class FormRequestsService {
 
     async getTotalEmailsRecords() {
         let response = await fetch("http://localhost:5000/get_total_emails_records");
-        return await response.json();
+        return response.json();
     }
 
     async getIsTotalRecordsToday() {
         let response = await fetch("http://localhost:5000/is_total_emails_records_today");
-        return await response.json();
+        return response.json();
     }
 
     async postUpdateTotalEmailsToday(todayTotalEmails, isTotalEmailsRecordCreated) {
@@ -48,6 +48,19 @@ class FormRequestsService {
             })
         });
     }
+
+    async postSubscriptionNotificationToUsers(subscribeData) {
+        let response = await fetch("http://localhost:5000/notify_users", {
+            method: "Post",
+            headers: this.POST_REQUESTS_HEADERS,
+            body: JSON.stringify({
+                email: subscribeData.EMAIL, 
+                name: `${subscribeData.FNAME} ${subscribeData.LNAME}`
+            })
+        });
+        return response.json();
+    }
+    
 }
 
 

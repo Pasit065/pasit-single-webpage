@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Container, Row, Col } from "react-bootstrap";
 import PngFilePaths from "../constant/png-file-paths";
 import UrlStorage from "../constant/url-storage";
+import FormRequestsService from "../modules/form-requests-service";
 
 export const QuestionForm = ({ imgParrentPath }) => {
     const initialFormData = {
@@ -13,7 +14,8 @@ export const QuestionForm = ({ imgParrentPath }) => {
         address:"",
         message:""
     };
-
+ 
+    const formRequestsService = new FormRequestsService();
     const pngFilePaths = new PngFilePaths(imgParrentPath);
     const urlStorage = new UrlStorage()
 
@@ -32,15 +34,7 @@ export const QuestionForm = ({ imgParrentPath }) => {
         e.preventDefault();
         setButtonText("Sending...");
 
-        let response = await fetch("http://localhost:5000/post_question", {
-            method:"Post",
-            headers:{
-                "Content-Type":"Application/json;charset=utf-8"
-            },
-            body:JSON.stringify(formData)
-        });
-        
-        let result = await response.json();
+        let result = await formRequestsService.postNewQuestion(formData);
 
         if (result.code === 200) {
           setResponseStatus({isSuccess:true, message:"Question has been send successfully."});
@@ -51,34 +45,12 @@ export const QuestionForm = ({ imgParrentPath }) => {
         setFormData(initialFormData);
         setButtonText("send");
 
-        response = await fetch("http://localhost:5000/insert_email_records", {
-            method:"Post",
-            headers:{
-                "Content-Type":"Application/json;charset=utf-8"
-            },
-            body:JSON.stringify({
-            send_from: 'pan289277@gmail.com',
-            send_to: formData.email,
-            is_success: result.code === 200 ? true:false
-          })
-        });
+        await formRequestsService.postInsertEmailRecords(formData, result.code);
 
-        response = await fetch("http://localhost:5000/get_total_emails_records");
-        let todayTotalEmails = await response.json();
-
-        response = await fetch("http://localhost:5000/is_total_emails_records_today");
-        let isTotalEmailsRecordCreated= await response.json();
+        let todayTotalEmails = await formRequestsService.getTotalEmailsRecords();
+        let isTotalEmailsRecordCreated = await formRequestsService.getIsTotalRecordsToday();
         
-        response = await fetch("http://localhost:5000/updated_total_emails_todays", {
-            method:"Post",
-            headers:{
-                "Content-Type":"Application/json;charset=utf-8"
-            },
-            body:JSON.stringify({
-              total_emails: todayTotalEmails.total_records_for_today, 
-              is_created_total_emails_records_today: isTotalEmailsRecordCreated.is_total_emails_records_today
-          })
-        });
+        await formRequestsService.postUpdateTotalEmailsToday(todayTotalEmails, isTotalEmailsRecordCreated);
     }
 
     return (

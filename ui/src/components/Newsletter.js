@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Alert, Container, Row, Col } from "react-bootstrap";
+import FormRequestsService from "../modules/form-requests-service";
 
 export const Newsletter = ({onValidate, status, message}) => {
     let initialSubscribeData = {
@@ -7,6 +8,8 @@ export const Newsletter = ({onValidate, status, message}) => {
         FNAME: "",
         LNAME: ""
     };
+
+    const formRequestsService = new FormRequestsService();
 
     const [subscribeData, setSubscribeData] = useState(initialSubscribeData);
     const [notifyStatus, setNotifyStatus] = useState('');
@@ -28,18 +31,11 @@ export const Newsletter = ({onValidate, status, message}) => {
     }
 
     useEffect(() => {
-      const sendSuccessNotify = async() => {
-        let response = await fetch("http://localhost:5000/notify_users", {
-          method: "post",
-          headers: {
-              "Content-Type":"Application/json;charset=utf-8"
-          },
-          body: JSON.stringify({
-            email: subscribeData.EMAIL, 
-            name: `${subscribeData.FNAME} ${subscribeData.LNAME}`
-      })
-      });
-      let result = await response.json();
+      const sendSuccessNotify = async () => {
+        
+      let result = await formRequestsService.postSubscriptionNotificationToUsers(
+        subscribeData
+      );
       
       if (result.code !== 200) {
         setNotifyStatus({
