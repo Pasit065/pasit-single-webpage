@@ -94,10 +94,18 @@ export const QuestionForm = ({ imgParrentPath }) => {
                 <form onSubmit={handleSubmit}>
                   <Row>
                     <Col md={6}>
-                        <input type="text" placeholder="firstname" value={formData.firstname} onChange={(e) => handleFormChange('firstname', e.target.value)} pattern="[A-Z][a-z]{1,20}" required="required" />
+                        <input type="text" placeholder="firstname" 
+                        value={formData.firstname} onChange={(e) => handleFormChange('firstname', e.target.value)} 
+                        pattern="[A-Z][a-z]{0,19}" title="Invalid firstname. 
+                        firstname must contain 1 uppercase and the length is equal or lower than 20."
+                         required="required" />
                     </Col>
                     <Col md={6}>
-                      <input type="text" placeholder="lastname" value={formData.lastname} onChange={(e) => handleFormChange('lastname', e.target.value)} pattern="[A-Z][a-z]{1,20}" title="Invalid name. Your name must contain at least one uppercase and the length will be 2 to 20." required="required" />
+                      <input type="text" placeholder="lastname" 
+                      value={formData.lastname} onChange={(e) => handleFormChange('lastname', e.target.value)} 
+                      pattern="[A-Z][a-z]{0,19}" title="Invalid lastname. 
+                      lastname must contain 1 uppercase and the length is equal or lower than 20."
+                      required="required" />
                     </Col>
                   </Row>
                   <Row>
@@ -105,12 +113,19 @@ export const QuestionForm = ({ imgParrentPath }) => {
                       <input type="number" placeholder="age" value={formData.age} onChange={(e) => handleFormChange('age', e.target.value)} min={1} max={100} title required="required" />
                     </Col>
                     <Col md={6}>
-                      <input type="tel" placeholder="phone number" value={formData.phone} onChange={(e) => handleFormChange('phone', e.target.value)} />
+                      <input type="tel" placeholder="phone number" value={formData.phone} 
+                      onChange={(e) => handleFormChange('phone', e.target.value)}
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="
+                      Your phone number must be ten numbers like 'xxx-xxx-xxxx'" />
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <input type="email" placeholder="email" value={formData.email} onChange={(e) => handleFormChange('email', e.target.value)} required="required" />
+                      <input type="email" placeholder="email" value={formData.email} 
+                      onChange={(e) => handleFormChange('email', e.target.value)} 
+                      pattern="[A-Za-z0-9_]{1,}@[a-z0-9]{3,}.[a-z0-9]{2,}"
+                      title="Invalid emails. emails should match with 'characters@characters.domain'"
+                      required="required" />
                     </Col>
                   </Row>
                   <Row>
@@ -120,7 +135,8 @@ export const QuestionForm = ({ imgParrentPath }) => {
                   </Row>
                   <Row>
                     <Col>
-                      <textarea rows={4} type="text" placeholder="message" value={formData.message} onChange={(e) => handleFormChange('message', e.target.value)} title="Lsss" required="required" />
+                      <textarea rows={4} type="text" placeholder="message" value={formData.message} onChange={(e) => handleFormChange('message', e.target.value)} 
+                      required="required" />
                       <button type="submit"><span>{buttonText}</span></button>
                     </Col>
                   </Row>

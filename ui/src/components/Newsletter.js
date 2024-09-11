@@ -79,15 +79,27 @@ export const Newsletter = ({onValidate, status, message}) => {
               <form onSubmit={handleSubmit}>
                 <Row>
                   <Col>
-                    <input type="email" placeholder="email address" value={subscribeData.EMAIL} onChange={(e) => handleChange(e.target.value, 'EMAIL')} required="required" />
+                    <input type="email" placeholder="email address" value={subscribeData.EMAIL} 
+                    onChange={(e) => handleChange(e.target.value, 'EMAIL')} 
+                    pattern="[a-zA-Z0-9]{1,}@[a-z0-9]{1,}.[a-z0-9]{2,}"
+                    title="Invalid emails. emails should match with 'characters@characters.domain'"
+                    required="required" />
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={12} sm={6}>
-                    <input type="text" placeholder="firstname" value={subscribeData.FNAME} onChange={(e) => handleChange(e.target.value, 'FNAME')} required="required" />
+                    <input type="text" placeholder="firstname" value={subscribeData.FNAME} 
+                    onChange={(e) => handleChange(e.target.value, 'FNAME')} 
+                    pattern="[A-Z][a-z]{0,19}"
+                    title="Invalid firstname. firstname must contain 1 uppercase and the length is equal or lower than 20."
+                    required="required" />
                   </Col>
                   <Col xs={12} sm={6}>
-                    <input type="text" placeholder="lastname" value={subscribeData.LNAME} onChange={(e) => handleChange(e.target.value, 'LNAME')} required="required" />                
+                    <input type="text" placeholder="lastname" value={subscribeData.LNAME} 
+                    onChange={(e) => handleChange(e.target.value, 'LNAME')} 
+                    pattern="[A-Z][a-z]{0,19}" 
+                    title="Invalid lastname. lastname must contain 1 uppercase and the length is equal or lower than 20."
+                    required="required" />                
                   </Col> 
                 </Row>
                 <button type="submit"><span>Submit</span></button>
