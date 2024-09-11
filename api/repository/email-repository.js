@@ -10,8 +10,6 @@ class EmailRepository
     createEveryTables(createTableQueries) {
         const db = new sqlite3.Database(this.fileLocation)
 
-        console.log(typeof createTableQueries)
-
         if (typeof createTableQueries !== "object") {
             throw ("Only list of queries are allowed.");
         }
@@ -73,9 +71,8 @@ class EmailRepository
                 insertNewTotalEmailsRowQueries = insertNewTotalEmailsRowQueries.replace(
                     `totalClientsMessage`, bodyParmas.total_emails
                 )
-    
-                db.run(insertNewEmailsRecordsQueries);
 
+                db.run(insertNewTotalEmailsRowQueries);
             } else {
                 updateTotalEmailsQueries = updateTotalEmailsQueries.replace(
                     'totalClientsMessage', bodyParmas.total_emails
@@ -85,13 +82,12 @@ class EmailRepository
             }
     
             db.close()
-
-        } catch(err) {
-            res.json({ERROR: "Failed to updated total emails table."})
+        } catch (err) {
+            res.json({ERROR: "Can't update total emails for todays."})
         }
 
         res.json({status: 200, message: "total emails for today has been updated successfully."})
-    }
+    }     
 }
 
 export default EmailRepository;

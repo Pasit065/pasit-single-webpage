@@ -21,15 +21,15 @@ class FormRequestsService {
             method:"Post",
             headers: this.POST_REQUESTS_HEADERS,
             body:JSON.stringify({
-                send_from: 'pan289277@gmail.com',
-                send_to: formData.email,
-                is_success: emailResultCode === 200 ? true:false
+                sendFrom: 'pan289277@gmail.com',
+                sendTo: formData.email,
+                isSuccess: emailResultCode === 200 ? true:false
             })
         });
     }
 
     async getTotalEmailsRecords() {
-        let response = await fetch("http://localhost:5000/get_total_emails_records");
+        let response = await fetch("http://localhost:5000/get_total_emails_send_records_today");
         return response.json();
     }
 

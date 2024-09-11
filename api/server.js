@@ -12,7 +12,7 @@ import FileLocation from './constant/file-location.js';
 const getReplacedQueries = (queries, mappingOldAndNewData) => {
     let newQueries = queries;
     for (let mappingData of mappingOldAndNewData) {
-        newQueries.replace(mappingData.oldValue, mappingData.newValue);
+        newQueries = newQueries.replace(mappingData.oldValue, mappingData.newValue);
     };
 
     return newQueries
@@ -63,6 +63,7 @@ const transporter = nodemailer.createTransport({
 // Get total emails for today if it true it means in total emails table
 // it already has total emails counting for today.
 Router.get('/is_total_emails_records_today', (req, res) => {
+    console.log(`is_total_emails_records_today works fine`)
     emailRepository.isTotalEmailsRecordsToday(
         getTotalRowQueries.GET_TOTAL_EMAILS_IN_TODAY,
         res
@@ -71,14 +72,17 @@ Router.get('/is_total_emails_records_today', (req, res) => {
 
 // Checks total emails that has been send for today (Including failed emails).
 Router.get('/get_total_emails_send_records_today', (req, res) => {
-   emailRepository.getTotalEmailsSendRecordsToday(
+    console.log(`get_total_emails_send_records_today works fine`)
+    emailRepository.getTotalEmailsSendRecordsToday(
         getTotalRowQueries.GET_TOTAL_SEND_RECORDS_FOR_TODAY,
         res
     )
+
 })
 
 // Sending emails.
 Router.post("/post_question", (req, res) => {
+    console.log(`post_question works fine`)
     const formData = req.body;
     const mailMessge = {
         to: formData.email,
@@ -104,6 +108,7 @@ Router.post("/post_question", (req, res) => {
 
 // Insert new email record after email has been send
 Router.post('/insert_email_records', (req, res) => {
+    console.log(`insert_email_records works fine`)
     let new_email_data = req.body;
     let mappingPrevToNewColValues = [];
 
@@ -129,6 +134,8 @@ Router.post('/insert_email_records', (req, res) => {
 
 // Updated total emails.
 Router.post('/updated_total_emails_todays', (req, res) => {
+    console.log(req.body)
+    console.log(`updated_total_emails_todays works fine`)
     emailRepository.updatedTotalEmailsToday(
         req.body,
         insertTableQueries.INSERT_NEW_TOTAL_EMAILS_ROW,
@@ -139,6 +146,7 @@ Router.post('/updated_total_emails_todays', (req, res) => {
 
 // Notify users after users has subscribed.
 Router.post('/notify_users', (req, res) => {
+    console.log(`notify_users works fine`)
     const mailMessge = {
         to: req.body.email,
         subject: 'Congraduation!! Thanks you for your subscribe.',
