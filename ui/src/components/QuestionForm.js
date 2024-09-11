@@ -14,7 +14,7 @@ export const QuestionForm = ({ imgParrentPath }) => {
         address:"",
         message:""
     };
- 
+
     const formRequestsService = new FormRequestsService();
     const pngFilePaths = new PngFilePaths(imgParrentPath);
     const urlStorage = new UrlStorage()
@@ -94,15 +94,15 @@ export const QuestionForm = ({ imgParrentPath }) => {
                 <form onSubmit={handleSubmit}>
                   <Row>
                     <Col md={6}>
-                        <input type="text" placeholder="firstname" title="Please fill this thing" value={formData.firstname} onChange={(e) => handleFormChange('firstname', e.target.value)} pattern="[a-zA_Z]{2,4}" required="required" />
+                        <input type="text" placeholder="firstname" value={formData.firstname} onChange={(e) => handleFormChange('firstname', e.target.value)} pattern="[A-Z][a-z]{1,20}" required="required" />
                     </Col>
                     <Col md={6}>
-                      <input type="text" placeholder="lastname" value={formData.lastname} onChange={(e) => handleFormChange('lastname', e.target.value)} required="required" />
+                      <input type="text" placeholder="lastname" value={formData.lastname} onChange={(e) => handleFormChange('lastname', e.target.value)} pattern="[A-Z][a-z]{1,20}" title="Invalid name. Your name must contain at least one uppercase and the length will be 2 to 20." required="required" />
                     </Col>
                   </Row>
                   <Row>
                     <Col md={6}>
-                      <input type="number" placeholder="age" value={formData.age} onChange={(e) => handleFormChange('age', e.target.value)} required="required" />
+                      <input type="number" placeholder="age" value={formData.age} onChange={(e) => handleFormChange('age', e.target.value)} min={1} max={100} title required="required" />
                     </Col>
                     <Col md={6}>
                       <input type="tel" placeholder="phone number" value={formData.phone} onChange={(e) => handleFormChange('phone', e.target.value)} />
