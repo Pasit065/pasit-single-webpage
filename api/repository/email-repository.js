@@ -66,6 +66,7 @@ class EmailRepository
     updatedTotalEmailsToday(bodyParmas, insertNewTotalEmailsRowQueries, updateTotalEmailsQueries, res) {
         let db = new sqlite3.Database(this.fileLocation)
 
+        console.log(`Now total emails is ${bodyParmas.total_emails}`)
         try {
             if (!bodyParmas.is_created_total_emails_records_today) {
                 insertNewTotalEmailsRowQueries = insertNewTotalEmailsRowQueries.replace(

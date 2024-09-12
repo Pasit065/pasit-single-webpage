@@ -2,7 +2,7 @@ class UpdateTableQueries {
     constructor() {
         this.UPDATE_TOTAL_EMAILS = `
         UPDATE total_emails
-        SET total_clients_message = new_total_emails_value
+        SET total_clients_message = totalClientsMessage
 
         WHERE date = date('now', 'localtime')
         `
