@@ -1,49 +1,60 @@
 # Pasit-Single-Website
-**Pasit-Single-Website** is a single page website for my personal data which developed based on **React Framework** and **Express Framework** using **Javascript language** with *Create React App* environment, HTML and CSS to optimize contents.
-
+**Pasit-Single-Website** is a single page website for my personal data developed based on **React Framework** and **Express Framework** using **Javascript language** with *Create React App* environment, HTML and CSS to optimize contents.
 
 ## Overview
-In the project of a single page website contain multiple components that introduce my personal profile information such as skills, projects, content and etc and the project also provide question form and subscription form and notification script for user that filled form via email and retrive question form data with *Sqlite3* database.
+In the project contain multiple components section that introduce my personal profile information such as skills, projects and etc. Moreover, it provide my contact and my gitHub account link.
+
+The project also provide question form and subscription form that allow user to fill form and sent response to user via email. Form is executed and fetching data to backend server to retrive user data.
 
 ![](./ui/public/webpage-result/banner_and_navbar.png)
 
-**Pasit-Single-Website** is created by **React Framework** which working with **Express Framework** contain backend-script and frontend-script inside isolated directory named `ui` and `api`. 
+## Important Directories and Files
+- `ui` used for store **React Website** script which contain every components. every components is stored inside `./ui/src/components`.
 
-- Utilzing **JSX Format** in each component to determine webpage format and contents.
+- `api` directory used for store **Express** server side script to handling every requests that is provided. 
 
-- Using `App.css` inside `./ui/src/` directory for styling webpage.
+- `database` directory used for contain `email_data.db` file which storing email status data.
 
-## Important Directories
-- `ui` used for store React scripts that display every components in website. In `ui` section it contain seperated multiple components which display every section of website.
+- `App.css` inside `./ui/src/` directory for styling webpage.
 
-- `api` directory used for store **Express** server side script to handling every requests that is provided. `api`
+## Database
+Database that is used by the project is *Sqlite3 DBMS (Database Management System)* which is flexible to store and retrive data.
 
-- `database` directory used for contain `email_data.db` file which storing email status data and total email in each day.
+Inside `email_data.db` have 2 tables as follow
 
-## API
-The website contain 2 forms which named `QuestionForm` and `MailchimpForm`. When forms is filled script in ui section will sent requests to server which `server.js` has been executed to handling requests to post result of form filled to user email.
+- `email_send_records` used for store each email record data.
 
-### `QuestionForm` Diagram
-- `QuestionForm` will retrive users form data and send email to user if form data is correct then **express server** will update new email status data to **email_send_records** table. Moreover, **express server** will also update **total_emails** table for total emails that have been send today.
+- `total_emails` used for counting total emails in each day.
+
+## API Forms
+The website contain 2 forms named `QuestionForm` and `MailchimpForm` that are allowed user to fill data.
+
+## `QuestionForm`
+
+![](./ui/public/webpage-result/question.png)
+
+Initially when user has filled `QuestionForm`, it will response user input by sending email response. Moreover, React Website is fetching user's input to **Express Server** to retrive data to `email_data.db`.
+
+### Simplified Diagram
+
+![](./ui/public/simplified_question_form.png)
+
+
 
 ### `MailchimpForm` Diagram
 - `MailchimpForm` provided **Mailchimp Form** that contain form to retrive users subscription and store subscription to **Mailchimp** server that inside **Mailchimp** website. When subscription is provided successfully React ui script will sent request to
 Express server. After that Express server will sent user notification when subcscription is success. 
 
 - `Mailchimp` is a platform website that allow you to provide subscription server to retrive users subscription data. First, log in and create some solution to retrive subscription data.
-
-## Initial Setup
 ## Usage
+### Initial Setup
+Before executing React webpage, a few setup are required.
 
-In the project directory, you can run:
-
+1. In `./package.json` 
 ## `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 `npm start` also execute command that you've define in `package.json`
 
