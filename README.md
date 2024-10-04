@@ -1,98 +1,110 @@
 # Pasit-Single-Website
-**Pasit-Single-Website** is a single page website for my personal data developed based on **React Framework** and **Express Framework** using **Javascript language** with *Create React App* environment, HTML and CSS to optimize contents.
+**Pasit-Single-Website** is a single-page website developed using **React Framework** for the frontend and **Express Framework** for the backend, utilizing **Javascript** in *Create React App* environment. The website utilize HTML and CSS to optimize contents presentation.
 
 ## Overview
-In the project contain multiple components section that introduce my personal profile information such as skills, projects and etc. Moreover, it provide my contact and my gitHub account link.
+This project features multiple components section that introduce my personal profile including skills, projects and more. Moreover, it provides my contact information and my GitHub account link.
 
-The project also provide question form and subscription form that allow user to fill form and sent response to user via email. Form is executed and fetching data to backend server to retrive user data.
+The website includes a question form and subscription form that allow users to submit inquires and subscribe to my website response is sent to user via email. Form is executed and data being fetched to backend server to retrieve user data.
 
 ![](./ui/public/webpage-result/banner_and_navbar.png)
 
 ## Important Directories and Files
-- `ui` used for store **React Website** script which contain every components. every components is stored inside `./ui/src/components`.
+- `ui` directory used for store **React Website** script, including all components located in `./ui/src/components`.
 
-- `api` directory used for store **Express** server side script to handling every requests that is provided. 
+- `api` directory used for houses **Express** server-side script to handling incoming requests. 
 
-- `database` directory used for contain `email_data.db` file which storing email status data.
+- `database` directory used for contains `email_data.db` file, which stores email status data.
 
-- `App.css` inside `./ui/src/` directory for styling webpage.
+- `App.css` file located in `./ui/src/` for styling webpage.
 
 ## Database
-Database that is used by the project is *Sqlite3 DBMS (Database Management System)* which is flexible to store and retrive data.
+The project utilizes *Sqlite3 as *Database Management System (DBMS)*, which is flexible to store and retrive data.
 
-Inside `email_data.db` have 2 tables as follow
+Inside `email_data.db` contains 2 tables.
 
-- `email_send_records` used for store each email record data.
+- `email_send_records` used for store each email sent data.
 
-- `total_emails` used for counting total emails in each day.
+- `total_emails` used for counts the total emails sent each day.
 
 ## API Forms
-The website contain 2 forms named `QuestionForm` and `MailchimpForm` that are allowed user to fill data.
+The website include 2 forms named `QuestionForm` and `MailchimpForm` that allowing user to submit the form data.
 
 ## `QuestionForm`
 
 ![](./ui/public/webpage-result/question.png)
 
-Initially when user has filled `QuestionForm`, it will response user input by sending email response. Moreover, React Website is fetching user's input to **Express Server** to retrive data to `email_data.db`.
+Upon user filling out the `QuestionForm`,  response will be sent to user by sending email response. Addtionally, the data of user's input is sent to **Express Server**, which retrive data and stores it to `email_data.db`.
 
 ### Simplified Diagram
 
 ![](./ui/public/simplified_question_form.png)
 
+### Flowchart 
 
 
-### `MailchimpForm` Diagram
-- `MailchimpForm` provided **Mailchimp Form** that contain form to retrive users subscription and store subscription to **Mailchimp** server that inside **Mailchimp** website. When subscription is provided successfully React ui script will sent request to
-Express server. After that Express server will sent user notification when subcscription is success. 
 
-- `Mailchimp` is a platform website that allow you to provide subscription server to retrive users subscription data. First, log in and create some solution to retrive subscription data.
+## `MailchimpForm`
+**Mailchimp** is a marketing platform that facilitates interaction, subscription and communications with clients.
+
+`MailchimpForm` provided subscription form that allow users to subscribe the project webpage. When users submit form data, The React Website sends a request to **Mailchimp website server** of registered account in **Mailchimp** to validate and store subscriber data in website.
+
+### Simplified Diagram
+
+![](./ui/public/simplified_mailchimp_form.png)
+
+### Flowchart 
+
 ## Usage
 ### Initial Setup
 Before executing React webpage, a few setup are required.
 
-1. In `./package.json` 
-## `npm start`
+1. In `./package.json` ensure that `start`, `build`, `test` and `eject` are set as follows.
+    ```JSON
+    {
+        "scripts": {
+            "start": "cd ./ui/ && react-scripts start",
+            "build": "cd ./ui/ && react-scripts build",
+            "test": "cd ./ui/ && react-scripts test",
+            "eject": "cd ./ui/ && react-scripts eject"
+        }
+    }
+    ```
 
-Runs the app in the development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. In the `ui` directory ensure that you have created another `package.json` file which used to execute `index.js` file and ensure that `main` key is set to `index.js`.
+    ```JSON
+    {
+        "main": "index.js",
+    }
+    ```
 
-`npm start` also execute command that you've define in `package.json`
+3. In the `api` create another `package.json` and set `type` to `module`.
+    ```JSON
+    {
+        "type": "module",
+    }
+    ```
+4. Create `.env` file in the `ui` directory for environment varaiable. Inside the file must contain `REACT_APP_ADMIN_EMAIL`, `REACT_APP_ADMIN_GITHUB` and  which users must given a value.
 
-For example if in `package.json` "scripts" is:
+5. Register to **Mailchimp** and create sign -up form. Afterward, populate the `.env` file with `REACT_APP_MAILCHIMP_U`, `REACT_APP_MAILCHIMP_URL` and `REACT_APP_MAILCHIMP_ID` These values acquired from *Sign up form url*  .
 
+## Execution of the Webpage
+To ensure email responses for all forms, user must execute both **React Webpage** and **Express Server** simultaneously.
+
+### Execute React Webpage.
+Ensure our terminal is in project parent directory.
+
+Runs the app in the development mode by `npm start`.
+
+```bash
+npm start
 ```
-"scripts": {
-    "start": "cd ./ui/ && react-script start"
-}
+This command will open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### Execute Express Server.
+Open another terminal and execute another script to handle income requests from the **React Webpage** by executing `server.js` file.
+
+```bash
+cd api
+node server.js
 ```
-
-Which means you are going to `ui` directory and execute `react-script start`
-
-## `react-script start` 
-`react-script start` will find `package.json` file for initial configuration and find 
-`main` file that will be executed.
-
-## `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-## `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This command will open [http://localhost:5000](http://localhost:5000) to view it in your browser.
