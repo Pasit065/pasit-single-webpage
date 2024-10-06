@@ -85,7 +85,23 @@ Before executing React webpage, a few setup are required.
     ```
 4. Create `.env` file in the `ui` directory for environment varaiable. Inside the file must contain `REACT_APP_ADMIN_EMAIL`, `REACT_APP_ADMIN_GITHUB` and  which users must given a value.
 
-5. Register to **Mailchimp** and create sign -up form. Afterward, populate the `.env` file with `REACT_APP_MAILCHIMP_U`, `REACT_APP_MAILCHIMP_URL` and `REACT_APP_MAILCHIMP_ID` These values acquired from *Sign up form url*  .
+5. Register to **Mailchimp** and create sign -up form. Afterward, populate the `.env` file with `REACT_APP_MAILCHIMP_U`, `REACT_APP_MAILCHIMP_URL` and `REACT_APP_MAILCHIMP_ID` These values acquired from *Sign up form url* .
+
+6. Install required packages as follow
+    - react-bootstrap
+    - react-on-screen
+    - react-multi-carousel
+    - react-mailchimp-subscribe
+    - animate.css
+    - express
+    - nodemailer
+    - cors
+    - sqlite3
+
+    By using `npm install` command as example below.
+    ```Bash
+    npm install react-bootstrap
+    ```
 
 ## Execution of the Webpage
 To ensure email responses for all forms, user must execute both **React Webpage** and **Express Server** simultaneously.
