@@ -42,8 +42,6 @@ Upon user filling out the `QuestionForm`,  response will be sent to user by send
 
 `MailchimpForm` provided subscription form that allow users to subscribe the project webpage. When users submit form data, The React Website sends a request to **Mailchimp website server** of registered account in **Mailchimp** to validate and store subscriber data in website.
 
-### Simplified Diagram
-
 ![](./ui/public/simplified_mailchimp_form.png)
 
 
@@ -78,16 +76,22 @@ Before executing React webpage, a few setup are required.
     ```
 4. Create `.env` file in the `ui` directory for environment varaiable. Inside the file must contain `REACT_APP_ADMIN_EMAIL`, `REACT_APP_ADMIN_GITHUB` and  which users must given a value.
 
-    ```env
-    REACT_APP_ADMIN_EMAIL = "admin-emails-require"
-    REACT_APP_ADMIN_GITHUB = "github-webpage-link"
-    ```
-5. Register to **Mailchimp** and create sign -up form. Afterward, populate the `.env` file with `REACT_APP_MAILCHIMP_U`, `REACT_APP_MAILCHIMP_URL` and `REACT_APP_MAILCHIMP_ID` These values acquired from *Sign up form url*.
+5. Register to **Mailchimp** and create sign -up form. Afterward, populate the `.env` file with `REACT_APP_MAILCHIMP_U`, `REACT_APP_MAILCHIMP_URL` and `REACT_APP_MAILCHIMP_ID` These values acquired from *Sign up form url* .
 
-    ```env
-    REACT_APP_ADMIN_EMAIL_U = "u-token-get-from-mailchimp"
-    REACT_APP_MAILCHIMP_URL = "url-get-from-mailchimp"
-    REACT_APP_MAILCHIMP_ID = "v-token-get-from-mailchimp"
+6. Install required packages as follow
+    - react-bootstrap
+    - react-on-screen
+    - react-multi-carousel
+    - react-mailchimp-subscribe
+    - animate.css
+    - express
+    - nodemailer
+    - cors
+    - sqlite3
+
+    By using `npm install` command as example below.
+    ```Bash
+    npm install react-bootstrap
     ```
 
 ## Execution of the Webpage
