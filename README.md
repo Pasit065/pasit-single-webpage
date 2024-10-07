@@ -18,7 +18,7 @@ The website includes a question form and subscription form that allow users to s
 - `App.css` file located in `./ui/src/` for styling webpage.
 
 ## Database
-The project utilizes *Sqlite3 as *Database Management System (DBMS)*, which is flexible to store and retrive data.
+The project utilizes *Sqlite3* as *Database Management System (DBMS)*, which is flexible to store and retrive data.
 
 Inside `email_data.db` contains 2 tables.
 
@@ -35,13 +35,7 @@ The website include 2 forms named `QuestionForm` and `MailchimpForm` that allowi
 
 Upon user filling out the `QuestionForm`,  response will be sent to user by sending email response. Addtionally, the data of user's input is sent to **Express Server**, which retrive data and stores it to `email_data.db`.
 
-### Simplified Diagram
-
 ![](./ui/public/simplified_question_form.png)
-
-### Flowchart 
-
-
 
 ## `MailchimpForm`
 **Mailchimp** is a marketing platform that facilitates interaction, subscription and communications with clients.
@@ -52,7 +46,6 @@ Upon user filling out the `QuestionForm`,  response will be sent to user by send
 
 ![](./ui/public/simplified_mailchimp_form.png)
 
-### Flowchart 
 
 ## Usage
 ### Initial Setup
@@ -70,7 +63,7 @@ Before executing React webpage, a few setup are required.
     }
     ```
 
-2. In the `ui` directory ensure that you have created another `package.json` file which used to execute `index.js` file and ensure that `main` key is set to `index.js`.
+2. In the `ui` directory ensure that you have created another `package.json` file which used to execute `index.js` file and ensure that `main` is added.
     ```JSON
     {
         "main": "index.js",
@@ -85,7 +78,17 @@ Before executing React webpage, a few setup are required.
     ```
 4. Create `.env` file in the `ui` directory for environment varaiable. Inside the file must contain `REACT_APP_ADMIN_EMAIL`, `REACT_APP_ADMIN_GITHUB` and  which users must given a value.
 
-5. Register to **Mailchimp** and create sign -up form. Afterward, populate the `.env` file with `REACT_APP_MAILCHIMP_U`, `REACT_APP_MAILCHIMP_URL` and `REACT_APP_MAILCHIMP_ID` These values acquired from *Sign up form url*  .
+    ```env
+    REACT_APP_ADMIN_EMAIL = "admin-emails-require"
+    REACT_APP_ADMIN_GITHUB = "github-webpage-link"
+    ```
+5. Register to **Mailchimp** and create sign -up form. Afterward, populate the `.env` file with `REACT_APP_MAILCHIMP_U`, `REACT_APP_MAILCHIMP_URL` and `REACT_APP_MAILCHIMP_ID` These values acquired from *Sign up form url*.
+
+    ```env
+    REACT_APP_ADMIN_EMAIL_U = "u-token-get-from-mailchimp"
+    REACT_APP_MAILCHIMP_URL = "url-get-from-mailchimp"
+    REACT_APP_MAILCHIMP_ID = "v-token-get-from-mailchimp"
+    ```
 
 ## Execution of the Webpage
 To ensure email responses for all forms, user must execute both **React Webpage** and **Express Server** simultaneously.
