@@ -38,6 +38,9 @@ Upon user filling out the `QuestionForm`,  response will be sent to user by send
 ![](./ui/public/simplified_question_form.png)
 
 ## `MailchimpForm`
+
+![](./ui/public/webpage-result/subscription.png)
+
 **Mailchimp** is a marketing platform that facilitates interaction, subscription and communications with clients.
 
 `MailchimpForm` provided subscription form that allow users to subscribe the project webpage. When users submit form data, The React Website sends a request to **Mailchimp website server** of registered account in **Mailchimp** to validate and store subscriber data in website.
