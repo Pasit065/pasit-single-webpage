@@ -33,22 +33,23 @@ export const Newsletter = ({onValidate, status, message}) => {
     useEffect(() => {
       const sendSuccessNotify = async () => {
         
-      let result = await formRequestsService.postSubscriptionNotificationToUsers(
+        let result = await formRequestsService.postSubscriptionNotificationToUsers(
         subscribeData
-      );
+        );
       
-      if (result.code !== 200) {
-        setNotifyStatus({
-          status: "Incompleted",
-          message: `Email notify about subscribe haven't been send.`});
-      } else {
-        setNotifyStatus(
-          {
+        if (result.code !== 200) {
+          setNotifyStatus({
+            status: "Incompleted",
+            message: `Email notify about subscribe haven't been send.`
+          });
+        } else {
+          setNotifyStatus({
             status: "Completed",
-            message: `Please check your email, if your subscription has been completed.`});
+            message: `Please check your email, if your subscription has been completed.`
+          });
+        }
       }
       
-    }
     // sending, success, error
     
     if (status === "success") {

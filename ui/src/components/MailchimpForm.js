@@ -14,9 +14,9 @@ export const MailchimpForm = () => {
           status={status}
           message={message} />
           
-    )} >
+      )}>
 
-        </MailchimpSubscribe>)
+      </MailchimpSubscribe>)
       
 
 }
